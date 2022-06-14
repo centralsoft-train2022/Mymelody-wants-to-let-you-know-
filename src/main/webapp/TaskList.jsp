@@ -25,6 +25,7 @@
 		<tr>
 			<form  method="POST" action="DetailServlet">
 				<td><input type = 'submit' name = 'edit' value = 'タスク名'></td>
+				<td></td>
 			</form>
 		</tr>
 	
