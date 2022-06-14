@@ -7,6 +7,9 @@
 <title>詳細確認</title>
 </head>
 <body>
-<h1>詳細確認</h1>
+	<h1>詳細確認</h1>
+	<form  method="POST" action="Celebration.html">
+		<input type = "submit" value="達成">
+	</form>
 </body>
 </html>
