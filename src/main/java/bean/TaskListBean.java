@@ -9,7 +9,7 @@ public class TaskListBean
 	}
 
 	public void setTaskName(String TaskName) {
-		TaskName = TaskName;
+		this.TaskName = TaskName;
 	}
 
 }
