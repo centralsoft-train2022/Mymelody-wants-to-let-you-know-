@@ -24,7 +24,7 @@
 		
 		<tr>
 			<form  method="POST" action="DetailServlet">
-				<td><input type = 'submit' name = 'edit' value = 'タスク名'></td>
+				<td><input type = 'submit' name = 'edit' value = '<%=bean.getTaskName() %>'></td>
 				<td><%=bean.getTaskName() %></td>
 			</form>
 		</tr>
