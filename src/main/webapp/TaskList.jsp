@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%--<jsp:useBean id="bean" class="bean.TaskListBean" scope="request" />--%>
+
+<jsp:useBean id="bean" class="bean.TaskListBean" scope="request"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,17 +27,9 @@
 		<tr>
 			<form  method="POST" action="DetailServlet">
 				<td><input type = 'submit' name = 'edit' value = 'タスク名'></td>
-				<td></td>
+				<td><%=bean.getTaskName() %></td>
 			</form>
 		</tr>
-	
-
-		<tr>
-			<td><%=bean.getTaskName( )%> <br></td>
-
-		</tr>
-
-	
 	
 	</table>
 </body>

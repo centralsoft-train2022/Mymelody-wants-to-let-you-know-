@@ -1,4 +1,4 @@
-package Servlet;
+package web;
 
 import java.io.IOException;
 
@@ -8,12 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import Vo.EmployeesVo;
 import bean.TaskListBean;
 
-@WebServlet("/ShainListServlet")
+@WebServlet("/TaskListServlet")
 public class TaskListServlet extends HttpServlet {
 
 	protected void doPost(
@@ -22,14 +21,14 @@ public class TaskListServlet extends HttpServlet {
 			) throws ServletException, IOException
 	{
 		//社員リストwoDBから取得　課題
-		EmployeesVo  TaskList = getEmployeesVo("aaaaa");
+		EmployeesVo  emp = getEmployeesVo("aaaaa");
 
 		TaskListBean bean = new TaskListBean();
 
 
-		//セッションからログインユーザーを取得
-		HttpSession session = request.getSession();
-	    EmployeesVo emp  = (EmployeesVo)session.getAttribute("EmployeesVo");
+//		//セッションからログインユーザーを取得
+//		HttpSession session = request.getSession();
+//	    EmployeesVo emp  = (EmployeesVo)session.getAttribute("EmployeesVo");
 	    //String peStr  = (String)session.getAttribute("password");
 
 	    bean.setTaskName(emp.getEmployeename());
@@ -44,9 +43,9 @@ public class TaskListServlet extends HttpServlet {
 	//DBから従業員を取得する
 	private EmployeesVo getEmployeesVo( String TaskName)
 	{
-		EmployeesVo emp = null;
+		
 		//DBから従業員を取得 仮実装
-		emp = new EmployeesVo();
+		EmployeesVo emp = new EmployeesVo();
 		emp.setEmployeename(TaskName);
 		
 		return emp;

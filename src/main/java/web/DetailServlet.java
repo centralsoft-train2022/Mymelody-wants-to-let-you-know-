@@ -1,3 +1,4 @@
+package web;
 
 import java.io.IOException;
 
@@ -8,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet
+@WebServlet("/DetailServlet")
+public class DetailServlet extends HttpServlet
 {
 	protected void doPost(
 			HttpServletRequest request,
@@ -20,7 +21,7 @@ public class LoginServlet extends HttpServlet
 	
 
 			//JSPに遷移する
-			RequestDispatcher disp = request.getRequestDispatcher("/TaskListServlet.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("/Detail.jsp");
 			disp.forward(request, response);
 	}
 
