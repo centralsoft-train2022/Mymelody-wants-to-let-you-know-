@@ -17,9 +17,10 @@ public class DetailServlet extends HttpServlet
 			HttpServletResponse response
 			) throws ServletException, IOException
 	{
-		
+		request.setCharacterEncoding("UTF-8");
 		String s = request.getParameter("edit");
 		System.out.println(s);
+		
 
 	
 
