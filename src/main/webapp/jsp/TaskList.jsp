@@ -11,10 +11,6 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<form method="POST" action="RegisterServlet">
-		<input type='submit' name='add' value='追加'>
-
-
 	</form>
 	
 	<h2>タスク一覧</h2>
@@ -22,6 +18,5 @@
 	<form method="POST" action="DetailServlet">
 		タスク名<input type='submit' name='edit' value='タスク名'>
 		<%=bean.getTaskName()%>
-	</form>
-</body>
+	</form></body>
 </html>
