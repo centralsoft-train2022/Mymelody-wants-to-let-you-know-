@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet
 			
 			
 			//TaskListServletに遷移する
-			RequestDispatcher disp = request.getRequestDispatcher("/TaskListServlet");
+			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
 			disp.forward(request, response);
 	}
 

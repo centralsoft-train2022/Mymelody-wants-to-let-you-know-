@@ -21,7 +21,7 @@ public class RegisterServlet extends HttpServlet
 	
 
 			//JSPに遷移する
-			RequestDispatcher disp = request.getRequestDispatcher("/Register.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Register.jsp");
 			disp.forward(request, response);
 	}
 
