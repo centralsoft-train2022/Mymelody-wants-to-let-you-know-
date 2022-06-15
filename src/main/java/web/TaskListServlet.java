@@ -1,6 +1,8 @@
 package web;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import Vo.TasksVo;
 import bean.TaskListBean;
+import dao.DBUtil;
+import dao.TasksDao;
 
 @WebServlet("/TaskListServlet")
 public class TaskListServlet extends HttpServlet {
@@ -65,9 +69,24 @@ public class TaskListServlet extends HttpServlet {
 		//仮実装　あとで消す
 		List<TasksVo> tskList = new ArrayList<TasksVo>();
 		
-		TasksVo t1 = new TasksVo(0, null, null, false, null, false, null, false, null, false, 0, 0);
-		TasksVo t2 = new TasksVo(0, null, null, false, null, false, null, false, null, false, 0, 0);
+		//TasksVo t1 = new TasksVo(0, null, null, false, null, false, null, false, null, false, 0, 0);
+//		TasksVo t2 = new TasksVo(0, null, null, false, null, false, null, false, null, false, 0, 0);
+		
+		DBUtil db = new DBUtil( );
+		
+		try( Connection c = db.getConnection( ); )
+		{
 
+			TasksDao tdao = new TasksDao( c );
+
+			tskList = tdao.getAllTasks( );
+		}
+		catch( SQLException e )
+		{
+			throw new RuntimeException( e );
+		}
+		
+		/*
 		t1.setTaskid(1);
 		t2.setTaskid(2);
 
@@ -77,10 +96,9 @@ public class TaskListServlet extends HttpServlet {
 		t1.setCompleted(false);
 		t2.setCompleted(true);
 		
-
-
 		tskList.add(t1);
 		tskList.add(t2);
+		*/
 		//仮実装終わり
 
 		return tskList;
