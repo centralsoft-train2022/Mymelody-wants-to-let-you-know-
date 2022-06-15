@@ -25,17 +25,19 @@
 		<input type="radio" name="date1" value="Yes">Yes
 		<input type="radio" name="date1" value="No">No
 	</p>
-	<p>・アラートの繰り返し<br>
-		<input type="radio" name="date2" value="Yes">Yes
-		<input type="radio" name="date2" value="No">No
+	<p>・繰り返し期間<br>
+		<input type="number" name="month" value="0" min="0">カ月・
+		<input type="number" name="day" value="0" min="0">日・
+		<input type="number" name="hour" value="0" min="0">時間・
+		<input type="number" name="minutes" value="0" min="0">分
 	</p>
 	
 	
 	
-	<form  method="POST" action="TaskList">
+	<form  method="POST" action="../TaskList.jsp">
 		<input type = "submit" value="設定を適用">
 	</form>
-	<form  method="POST" action="TaskList">
+	<form  method="POST" action="../TaskList.jsp">
 		<input type = "submit" value="戻る">
 	</form>
 </body>
