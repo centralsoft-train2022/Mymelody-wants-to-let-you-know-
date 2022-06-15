@@ -17,7 +17,7 @@ public class DBUtil {
 	private static final String DB_SERVER = "localhost:3306";
 
 	/* DB名 */
-	private static final String dbname = "mydb";
+	private static final String dbname = "mymelody";
 
 	private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
