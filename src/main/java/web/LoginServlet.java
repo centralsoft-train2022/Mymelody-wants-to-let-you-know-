@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DBUtil;
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet
 {
@@ -17,6 +19,12 @@ public class LoginServlet extends HttpServlet
 			HttpServletResponse response
 			) throws ServletException, IOException
 	{
+			DBUtil db = new DBUtil( );
+			String idStr = request.getParameter("ID");
+			
+			
+			
+			
 			//TaskListServletに遷移する
 			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
 			disp.forward(request, response);
