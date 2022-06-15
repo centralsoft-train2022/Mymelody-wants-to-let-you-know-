@@ -10,6 +10,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ホーム画面</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<form  method="POST" action="../RegisterServlet">
@@ -18,8 +19,8 @@
 	
 	
 	<h2>タスク一覧</h2>
-	<form  method="POST" action="DetailServlet">
-		<table  border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
+	<form  method="POST" action="DetailServlet" >
+		<table  border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333" class="box1">
 			<tr>
 				<th>タスクID</th>
 				<th>タスク名</th>
