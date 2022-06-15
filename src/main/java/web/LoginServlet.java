@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet
 			) throws ServletException, IOException
 	{
 			//TaskListServletに遷移する
-			RequestDispatcher disp = request.getRequestDispatcher("/TaskListServlet");
+			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
 			disp.forward(request, response);
 	}
 
