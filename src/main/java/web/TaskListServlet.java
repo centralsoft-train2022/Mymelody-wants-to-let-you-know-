@@ -1,8 +1,6 @@
 package web;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import Vo.EmployeesVo;
 import bean.TaskListBean;
-import dao.DBUtil;
-import dao.EmployeesDao;
 
 @WebServlet("/TaskListServlet")
 public class TaskListServlet extends HttpServlet {
@@ -49,16 +45,16 @@ public class TaskListServlet extends HttpServlet {
 	{
 		
 		//DBから従業員を取得 仮実装
-		DBUtil db = new DBUtil( );
-		try( Connection c = db.getConnection( ); )
-		{
-			EmployeesDao	dao	= new EmployeesDao( c );
-			empList = dao.getAllEmployees();
-		}
-		catch( SQLException e )
-		{
-			throw new RuntimeException( e );
-		}
+//		DBUtil db = new DBUtil( );
+//		try( Connection c = db.getConnection( ); )
+//		{
+//			EmployeesDao	dao	= new EmployeesDao( c );
+//			empList = dao.getAllEmployees();
+//		}
+//		catch( SQLException e )
+//		{
+//			throw new RuntimeException( e );
+//		}
 		
 		
 		
