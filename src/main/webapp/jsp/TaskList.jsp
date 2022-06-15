@@ -13,8 +13,8 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<form  method="POST" action="../RegisterServlet">
-	    <input type = 'submit' name = 'add' value = '追加'>
+	<form  method="POST" action="RegisterServlet">
+	    <input type = 'submit' name = 'add' value = '新しいタスクを追加'>
 	</form>
 	
 	
