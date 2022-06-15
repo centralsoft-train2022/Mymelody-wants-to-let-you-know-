@@ -10,13 +10,16 @@
 <title>ホーム画面</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-	</form>
-	
+<body>	
 	<h2>タスク一覧</h2>
+	
+	
 
 	<form method="POST" action="DetailServlet">
-		タスク名<input type='submit' name='edit' value='タスク名'>
+		タスク<input type='submit' name='edit' value='タスク名'>
+		 <input type="submit" value="ログイン">
 		<%=bean.getTaskName()%>
-	</form></body>
+	</form>
+	
+	</body>
 </html>
