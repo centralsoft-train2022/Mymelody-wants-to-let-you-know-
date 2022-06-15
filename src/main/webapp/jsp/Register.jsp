@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>登録画面</h1>
-	<form method="POST" action="../html/Cheer.html">
+	<form method="POST" action="html/Cheer.html">
 		<input type="submit" value="登録！">
 	</form>
 </body>

@@ -17,6 +17,9 @@ public class DetailServlet extends HttpServlet
 			HttpServletResponse response
 			) throws ServletException, IOException
 	{
+		
+		String s = request.getParameter("edit");
+		System.out.println(s);
 
 	
 
