@@ -49,6 +49,10 @@ public class TasksVo implements Serializable {
 		this.pictures_pictureid = pictures_pictureid;
 	}
 
+	public TasksVo() {
+		super();
+	}
+
 	public int getTaskid() {
 		return taskid;
 	}
