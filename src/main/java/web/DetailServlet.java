@@ -21,7 +21,7 @@ public class DetailServlet extends HttpServlet
 	
 
 			//JSPに遷移する
-			RequestDispatcher disp = request.getRequestDispatcher("/Detail.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Detail.jsp");
 			disp.forward(request, response);
 	}
 

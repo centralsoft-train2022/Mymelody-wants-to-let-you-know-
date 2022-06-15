@@ -36,7 +36,7 @@ public class TaskListServlet extends HttpServlet {
 		request.setAttribute("bean", bean);
 
 		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/TaskList.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/jsp/TaskList.jsp");
 		disp.forward(request, response);
 	}
 
