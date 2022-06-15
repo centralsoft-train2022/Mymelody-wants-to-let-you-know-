@@ -39,7 +39,7 @@
 						<%=tv.getTaskid() %><br>
 					</td>
 					<td>
-						<input type = 'submit' name = 'edit' value = <%=tv.getTaskname() %>><br>
+						<button type = 'submit' name = 'edit' value =<%=tv.getTaskid() %>><%=tv.getTaskname() %></button><br>
 					</td>
 					<td>
 						<%=tv.isCompleted() %> <br>
