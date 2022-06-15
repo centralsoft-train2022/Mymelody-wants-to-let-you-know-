@@ -12,25 +12,42 @@
 	<title>ホーム画面</title>
 </head>
 <body>
-	<form  method="POST" action="RegisterServlet">
+	<form  method="POST" action="../RegisterServlet">
 	    <input type = 'submit' name = 'add' value = '追加'>
 	</form>
 	
 	
 	<h2>タスク一覧</h2>
-	<table>
-		<tr>
-			<th>タスク名</th>
-			<th>達成状況</th>
-		</tr>
+	<form  method="POST" action="DetailServlet">
+		<table  border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
+			<tr>
+				<th>タスクID</th>
+				<th>タスク名</th>
+				<th>達成状況</th>
+			</tr>
 		
-		<tr>
-			<form  method="POST" action="DetailServlet">
-				<td><input type = 'submit' name = 'edit' value = 'タスク名'></td>
-				<td><%=bean.getTaskName() %></td>
-			</form>
-		</tr>
-	
-	</table>
+			<tr>
+				<!--<td><input type = 'submit' name = 'edit' value = 'タスク名'></td>-->
+				<!-- <td><%=bean.getTaskName() %></td> -->
+				<%
+				for(Vo.TasksVo tv:bean.getTaskList())
+				{
+				%>
+				<tr>
+					<td>
+						<%=tv.getTaskid() %><br>
+					</td>
+					<td>
+						<input type = 'submit' name = 'edit' value = <%=tv.getTaskname() %>><br>
+					</td>
+					<td>
+						<%=tv.isCompleted() %> <br>
+					</td>
+				
+				<% }%>
+			</tr>
+				
+		</table>
+	</form>
 </body>
 </html>
