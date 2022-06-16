@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Vo.TasksVo;
-import bean.TaskListBean;
+import bean.DetailBean;
 import dao.DBUtil;
 import dao.TasksDao;
 
@@ -35,11 +35,10 @@ public class DetailServlet extends HttpServlet
 		
 
 		List<TasksVo>  taskList = getTasksVo(num);
-		TaskListBean bean = new TaskListBean();		
+		DetailBean bean = new DetailBean();		
 		bean.setTaskList(taskList);
-		System.out.println(taskList);
 
-	
+		request.setAttribute("bean", bean);
 
 		//JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Detail.jsp");
