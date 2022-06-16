@@ -1,14 +1,24 @@
 package bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Vo.TasksVo;
 
 public class DetailBean {
 	
-	
+	private List<TasksVo> taskList1 = new ArrayList<TasksVo>();
+	private List<String> PicturePaths = new ArrayList<String>();
 	private List<TasksVo> taskList;
 	private int Taskid;
+
+	public String getPicturePath(int index) {
+		return PicturePaths.get(index);
+	}
+
+	public void addPicturePath(String picturePath) {
+		PicturePaths.add(picturePath);
+	}
 
 	
 	public int getTaskid() {
@@ -20,11 +30,11 @@ public class DetailBean {
 	}
 
 	public List<TasksVo> getTaskList() {
-		return taskList;
+		return taskList1;
 	}
 
 	public void setTaskList(List<TasksVo> taskList) {
-		this.taskList = taskList;
+		this.taskList1 = taskList;
 	}
 	
 	

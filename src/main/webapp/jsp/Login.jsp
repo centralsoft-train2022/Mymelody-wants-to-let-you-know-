@@ -30,7 +30,7 @@
 		</form>
 	</div>
 	
-	<img src="<%=bean.getCharcterMainImageFileName() %>" title="キャラクター画像">
+	<img src="pictures/<%=bean.getImageFileName() %>" title="キャラクター画像" class="image">
 
 </body>
 </html>

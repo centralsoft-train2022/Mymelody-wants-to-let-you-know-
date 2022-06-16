@@ -3,9 +3,20 @@ package Vo;
 public class PicturesVo {
 
 	private int pictureId;
+	private String path;
 	private String characterName;
 	private String fileName;
-	private boolean isPopular;
+	private int charactertype;
+
+	
+	
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
 
 	public int getPictureId() {
 		return pictureId;
@@ -31,12 +42,12 @@ public class PicturesVo {
 		this.fileName = fileName;
 	}
 
-	public boolean isPopular() {
-		return isPopular;
+	public int getCharactertype() {
+		return charactertype;
 	}
 
-	public void setPopular(boolean isPopular) {
-		this.isPopular = isPopular;
+	public void setCharactertype(int charactertype) {
+		this.charactertype = charactertype;
 	}
 
 }

@@ -3,8 +3,13 @@
 .topimage {
 	margin: 0 auto;
 	width: 80%;
-	color: white;
-	border: double 5px;
+	border: double 5px white;
+	object-fit: cover;
+}
+
+.image {
+	margin: 0 auto;
+	width: 30%;
 	object-fit: cover;
 }
 

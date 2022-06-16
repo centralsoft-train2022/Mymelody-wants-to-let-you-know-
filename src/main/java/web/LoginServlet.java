@@ -64,14 +64,14 @@ public class LoginServlet extends HttpServlet {
 
 			PicturesDao dao = new PicturesDao(c);
 
-			pictureList = dao.getAllPictures();
+			pictureList = dao.getMymelodies();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
+		
 		Random r = new Random();
 
-		bean.setCharcterMainImageFileName(pictureList.get(r.nextInt(0, 69)).getFileName());
+		bean.setImageFileName(pictureList.get(r.nextInt(0, pictureList.size()-1)).getPath());
 		return bean;
 
 	}

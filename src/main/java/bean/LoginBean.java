@@ -1,13 +1,13 @@
 package bean;
 
 public class LoginBean {
-	private String charcterMainImageFileName;
+	private String ImageFileName;
 
-	public String getCharcterMainImageFileName() {
-		return charcterMainImageFileName;
+	public String getImageFileName() {
+		return ImageFileName;
 	}
 
-	public void setCharcterMainImageFileName(String charcterMainImageFileName) {
-		this.charcterMainImageFileName = charcterMainImageFileName;
+	public void setImageFileName(String ImageFileName) {
+		this.ImageFileName = ImageFileName;
 	}
 }
