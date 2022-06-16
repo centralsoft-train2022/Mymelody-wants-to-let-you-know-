@@ -29,13 +29,15 @@ public class TaskListServlet extends HttpServlet {
 //		EmployeesVo  emp = getEmployeesVo("aaaaa");//テストデータ（１つの場合）
 		List<TasksVo> taskList = getAllTasks();
 
-		List<PicturesVo> pictureList = getMajorCharacters();
+		
 
 		TaskListBean bean = new TaskListBean();
 
 		bean.setTaskList(taskList);
 		
-		bean.addPicturePath(pictureList.get(0).getPath());
+		List<PicturesVo> pictureList = getMajorCharacters();
+		for(PicturesVo pv:pictureList) {
+		bean.addPicturePath(pv.getPath());}
 
 //		//セッションからログインユーザーを取得
 //		HttpSession session = request.getSession();

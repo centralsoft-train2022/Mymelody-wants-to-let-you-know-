@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Vo.PicturesVo;
 import Vo.TasksVo;
 import bean.DetailBean;
 import dao.DBUtil;
+import dao.PicturesDao;
 import dao.TasksDao;
 
 @WebServlet("/DetailServlet")
@@ -36,13 +38,38 @@ public class DetailServlet extends HttpServlet
 		List<TasksVo>  taskList = getTasksVo(num);
 		DetailBean bean = new DetailBean();		
 		bean.setTaskList(taskList);
+<<<<<<< HEAD
 		bean.setTaskid(num);
 
+=======
+		
+		List<PicturesVo> pictureList = getMajorCharacters();
+		for(PicturesVo pv:pictureList) {
+			bean.addPicturePath(pv.getPath());}
+		
+>>>>>>> d2500339caeb33f09b0e6aeabd0cd2e13c9646b9
 		request.setAttribute("bean", bean);
 
 		//JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Detail.jsp");
 		disp.forward(request, response);
+	}
+	
+	private List<PicturesVo> getMajorCharacters() {
+		List<PicturesVo> pictureList = new ArrayList<PicturesVo>();
+		
+		DBUtil db = new DBUtil();
+
+		try (Connection c = db.getConnection();) {
+
+			PicturesDao dao = new PicturesDao(c);
+
+			pictureList = dao.getMajorCharacters();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return pictureList;
 	}
 	
 	
