@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Vo.PicturesVo;
-import Vo.TasksVo;
 import bean.DetailBean;
 import dao.DBUtil;
 import dao.PicturesDao;
 import dao.TasksDao;
+import vo.PicturesVo;
+import vo.TasksVo;
 
 @WebServlet("/DetailServlet")
 public class DetailServlet extends HttpServlet

@@ -1,4 +1,4 @@
-package Vo;
+package vo;
 
 /* Code Generator Information.
  * generator Version 1.0.0 release 2007/10/10

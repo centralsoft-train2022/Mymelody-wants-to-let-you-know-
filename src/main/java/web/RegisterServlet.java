@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Vo.PicturesVo;
 import bean.RegisterBean;
 import dao.DBUtil;
 import dao.PicturesDao;
+import vo.PicturesVo;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet
