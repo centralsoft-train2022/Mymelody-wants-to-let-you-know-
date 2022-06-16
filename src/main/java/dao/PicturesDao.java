@@ -18,10 +18,11 @@ public class PicturesDao {
 		this.con = con;
 	}
 
-	private static final String SELECT_ALL_SQL = "SELECT `pictures`.`pictureid`,\n"
+	private static final String SELECT_ALL_SQL = ""
+			+ "SELECT `pictures`.`pictureid`,\n"
 			+ "    `pictures`.`charactername`,\n"
 			+ "    `pictures`.`filename`,\n"
-			+ "    `pictures`.`popular`\n"
+			+ "    `pictures`.`charactertype`\n"
 			+ "FROM `mymelody`.`pictures`;\n"
 			+ ";";
 
@@ -38,9 +39,10 @@ public class PicturesDao {
 					pic.setPictureId(rset.getInt(1));
 					pic.setCharacterName(rset.getString(2));
 					pic.setFileName(rset.getString(3));
-					pic.setPopular(rset.getBoolean(4));
+					pic.setCharactertype(rset.getInt(4));
 
 					list.add(pic);
+					System.out.println(list);
 				}
 
 			}
@@ -52,11 +54,28 @@ public class PicturesDao {
 		return list;
 
 	}
+	
+	public List<PicturesVo> getMymelodies() {
+		List<PicturesVo> list = new ArrayList<PicturesVo>();
+		list = getAllPictures();
+		System.out.println(list);
+		list.removeIf(picture -> picture.getCharactertype() != 0);
+		System.out.println(list);
+		return list;
+	}
 
-	//	public PicturesVo getPicture(int id) {
-	//		PicturesVo 
-	//		return null;
-	//		
-	//	}
+	public List<PicturesVo> getMainCharacters() {
+		List<PicturesVo> list = new ArrayList<PicturesVo>();
+		list = getAllPictures();
+		list.removeIf(picture -> picture.getCharactertype() != 1);
+		return list;
+	}
+	
+	public List<PicturesVo> getSubCharacters() {
+		List<PicturesVo> list = new ArrayList<PicturesVo>();
+		list = getAllPictures();
+		list.removeIf(picture -> picture.getCharactertype() != 2);
+		return list;
+	}
 
 }
