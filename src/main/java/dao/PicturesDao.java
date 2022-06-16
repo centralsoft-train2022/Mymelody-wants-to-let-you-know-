@@ -40,7 +40,6 @@ public class PicturesDao {
 					pic.setCharacterName(rset.getString(2));
 					pic.setFileName(rset.getString(3));
 					pic.setCharactertype(rset.getInt(4));
-
 					list.add(pic);
 				}
 
@@ -63,7 +62,7 @@ public class PicturesDao {
 		return list;
 	}
 
-	public List<PicturesVo> getMainCharacters() {
+	public List<PicturesVo> getMajorCharacters() {
 		List<PicturesVo> list = new ArrayList<PicturesVo>();
 		list = getAllPictures();
 		list.removeIf(picture -> picture.getCharactertype() != 1);
@@ -72,7 +71,7 @@ public class PicturesDao {
 		return list;
 	}
 	
-	public List<PicturesVo> getSubCharacters() {
+	public List<PicturesVo> getMinorCharacters() {
 		List<PicturesVo> list = new ArrayList<PicturesVo>();
 		list = getAllPictures();
 		list.removeIf(picture -> picture.getCharactertype() != 2);

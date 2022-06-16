@@ -1,5 +1,6 @@
 package bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Vo.TasksVo;
@@ -12,7 +13,18 @@ public class DetailBean {
 	private boolean needmail;
 	private String mailtime;
 	
-	private List<TasksVo> taskList;
+	private List<TasksVo> taskList = new ArrayList<TasksVo>();
+	private List<String> PicturePaths = new ArrayList<String>();
+	
+	
+
+	public String getPicturePath(int index) {
+		return PicturePaths.get(index);
+	}
+
+	public void addPicturePath(String picturePath) {
+		PicturePaths.add(picturePath);
+	}
 
 	public String getTaskName() {
 		return TaskName;

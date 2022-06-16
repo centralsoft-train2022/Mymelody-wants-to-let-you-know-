@@ -1,10 +1,24 @@
 package bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GetDetailBean {
 	private String taskname;
 	private String mailtime;
 	private boolean needmail;
 	private String taskinterval;
+	private List<String> PicturePaths = new ArrayList<String>();
+	
+	
+
+	public String getPicturePath(int index) {
+		return PicturePaths.get(index);
+	}
+
+	public void addPicturePath(String picturePath) {
+		PicturePaths.add(picturePath);
+	}
 
 	public String getTaskname() {
 		return taskname;
