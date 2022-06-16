@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
 		
 		Random r = new Random();
 
-		bean.setImageFileName(pictureList.get(r.nextInt(0, pictureList.size()-1)).getFileName());
+		bean.setImageFileName(pictureList.get(r.nextInt(0, pictureList.size()-1)).getPath());
 		return bean;
 
 	}

@@ -3,9 +3,20 @@ package Vo;
 public class PicturesVo {
 
 	private int pictureId;
+	private String path;
 	private String characterName;
 	private String fileName;
 	private int charactertype;
+
+	
+	
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
 
 	public int getPictureId() {
 		return pictureId;

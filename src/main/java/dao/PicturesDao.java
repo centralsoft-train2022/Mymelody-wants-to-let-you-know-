@@ -58,9 +58,9 @@ public class PicturesDao {
 	public List<PicturesVo> getMymelodies() {
 		List<PicturesVo> list = new ArrayList<PicturesVo>();
 		list = getAllPictures();
-		System.out.println(list);
 		list.removeIf(picture -> picture.getCharactertype() != 0);
-		System.out.println(list);
+		for(PicturesVo pv:list) {
+		pv.setPath("mymelody/"+pv.getFileName());}
 		return list;
 	}
 
@@ -68,6 +68,8 @@ public class PicturesDao {
 		List<PicturesVo> list = new ArrayList<PicturesVo>();
 		list = getAllPictures();
 		list.removeIf(picture -> picture.getCharactertype() != 1);
+		for(PicturesVo pv:list) {
+			pv.setPath("majorCharacter/"+pv.getFileName());}
 		return list;
 	}
 	
@@ -75,6 +77,8 @@ public class PicturesDao {
 		List<PicturesVo> list = new ArrayList<PicturesVo>();
 		list = getAllPictures();
 		list.removeIf(picture -> picture.getCharactertype() != 2);
+		for(PicturesVo pv:list) {
+			pv.setPath("minorCharacter/"+pv.getFileName());}
 		return list;
 	}
 
