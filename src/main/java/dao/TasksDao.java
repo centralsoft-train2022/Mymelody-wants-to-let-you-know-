@@ -51,6 +51,13 @@ public class TasksDao {
 			+ " Where"
 			+ " taskid = ?";
 	
+	private static final String UPDATE_TaskAchievement = ""
+			+ "UPDATE \n"
+			+ "	tasks\n"
+			+ " set completed = True"
+			+ " WHERE\n"
+			+ " taskid = ?";
+	
 	public List<TasksVo> getAllTasks() {
 		List<TasksVo> list = new ArrayList<TasksVo>();
 
@@ -125,6 +132,18 @@ public class TasksDao {
 
 		return list;
 
+	}
+	
+	public void TaskAchievement(int num) throws SQLException {
+
+		PreparedStatement stmt = this.con.prepareStatement(UPDATE_TaskAchievement);
+
+		// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
+		stmt.setInt( 1, num );
+		/* ｓｑｌ実行 */
+		stmt.execute();
+		System.out.println(num);
+		
 	}
 
 }

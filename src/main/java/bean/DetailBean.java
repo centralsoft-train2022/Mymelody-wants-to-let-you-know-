@@ -6,17 +6,11 @@ import java.util.List;
 import vo.TasksVo;
 
 public class DetailBean {
-	private String TaskName;
-	private String TaskBody;
-	private boolean completed;
-	private String kigen;
-	private boolean needmail;
-	private String mailtime;
 	
-	private List<TasksVo> taskList = new ArrayList<TasksVo>();
+	private List<TasksVo> taskList1 = new ArrayList<TasksVo>();
 	private List<String> PicturePaths = new ArrayList<String>();
-	
-	
+	private List<TasksVo> taskList;
+	private int Taskid;
 
 	public String getPicturePath(int index) {
 		return PicturePaths.get(index);
@@ -26,60 +20,22 @@ public class DetailBean {
 		PicturePaths.add(picturePath);
 	}
 
-	public String getTaskName() {
-		return TaskName;
+	
+	public int getTaskid() {
+		return this.Taskid;
 	}
 
-	public void setTaskName(String TaskName) {
-		this.TaskName = TaskName;
+	public void setTaskid(int Taskid) {
+		this.Taskid = Taskid;
 	}
 
 	public List<TasksVo> getTaskList() {
-		return taskList;
+		return taskList1;
 	}
 
 	public void setTaskList(List<TasksVo> taskList) {
-		this.taskList = taskList;
+		this.taskList1 = taskList;
 	}
 	
-	public void setTaskBody(String TaskBody) {
-		this.TaskBody = TaskBody;
-	}
 	
-	public boolean isCompleted() {
-		return completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
-	}
-
-	public String getKigen() {
-		return kigen;
-	}
-
-	public void setKigen(String kigen) {
-		this.kigen = kigen;
-	}
-
-	public boolean isNeedmail() {
-		return needmail;
-	}
-
-	public void setNeedmail(boolean needmail) {
-		this.needmail = needmail;
-	}
-
-	public String getMailtime() {
-		return mailtime;
-	}
-
-	public void setMailtime(String mailtime) {
-		this.mailtime = mailtime;
-	}
-
-	public String getTaskBody() {
-		return this.TaskBody;
-	}
-
 }

@@ -15,7 +15,7 @@
 	<h1>詳細確認</h1>
 	データベースからタスク情報をとってきて表示するよ
 	
-	<table  border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333" class="box1">
+	<table  border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333" class="box3">
 		<tr>
 			<th>タスク名</th>
 			<th>タスク内容</th>
@@ -34,7 +34,7 @@
 			<td><%=tv.getTaskname()%></td>
 			<td><%=tv.getTaskbody()%></td>
 			<td><%=tv.getKigen()%></td>
-			<td><%=tv.isCompleted()%></td>
+			<td><%=tv.isCompleted()? web.Comon.TRUE :web.Comon.FALSE %></td>
 			<td><%=tv.getKigen()%></td>
 			<td><%=tv.isNeedmail()%></td>
 			<td><%=tv.getTaskinterval()%></td>
@@ -44,8 +44,8 @@
 	
 	</table>
 	
-	<form  method="POST" action="html/Celebration.html">
-		<input type = "submit" value="達成">
+	<form  method="POST" action="CelebrationServlet">
+		<button type = 'submit' name = 'id' value ="<%=bean.getTaskid() %>">達成</button><br>
 	</form>
 	<h1>設定変更</h1>
 	<p>・タスク名変更<br>
