@@ -53,7 +53,6 @@ public class TasksVo implements Serializable {
 		this.taskvisible = taskvisible;
 		this.users_userid = users_userid;
 		this.pictures_pictureid = pictures_pictureid;
-		this.setAlreadysend(alreadysend);
 	}
 
 	public int getTaskid() {

@@ -27,7 +27,7 @@
 		</tr>
 		
 		<%
-		for(Vo.TasksVo tv:bean.getTaskList())
+		for(vo.TasksVo tv:bean.getTaskList())
 		{
 		%>
 		<tr>
