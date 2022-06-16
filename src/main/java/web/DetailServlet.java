@@ -36,6 +36,7 @@ public class DetailServlet extends HttpServlet
 		List<TasksVo>  taskList = getTasksVo(num);
 		DetailBean bean = new DetailBean();		
 		bean.setTaskList(taskList);
+		bean.setTaskid(num);
 
 		request.setAttribute("bean", bean);
 

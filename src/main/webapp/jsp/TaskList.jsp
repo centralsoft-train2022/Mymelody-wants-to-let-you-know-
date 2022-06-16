@@ -42,7 +42,7 @@
 						<button type = 'submit' name = 'edit' value =<%=tv.getTaskid() %>><%=tv.getTaskname() %></button><br>
 					</td>
 					<td>
-						<%=tv.isCompleted() %> <br>
+						<%=tv.isCompleted()? web.Comon.TRUE :web.Comon.FALSE %> <br>
 					</td>
 				
 				<% }%>
