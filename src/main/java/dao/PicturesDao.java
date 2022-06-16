@@ -42,7 +42,6 @@ public class PicturesDao {
 					pic.setCharactertype(rset.getInt(4));
 
 					list.add(pic);
-					System.out.println(list);
 				}
 
 			}
