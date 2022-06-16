@@ -31,13 +31,11 @@ public class DetailServlet extends HttpServlet
 		//押されたボタンのidを取得、Stringからintへの変換
 		String s = request.getParameter("edit");
 		int num = Integer.parseInt(s);
-		System.out.println(num);
 		
 
 		List<TasksVo>  taskList = getTasksVo(num);
 		TaskListBean bean = new TaskListBean();		
 		bean.setTaskList(taskList);
-		System.out.println(taskList);
 
 	
 

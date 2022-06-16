@@ -34,10 +34,10 @@
 	
 	
 	
-	<form  method="POST" action="../TaskList.jsp">
+	<form  method="POST" action="TaskListServlet">
 		<input type = "submit" value="設定を適用">
 	</form>
-	<form  method="POST" action="../TaskList.jsp">
+	<form  method="POST" action="TaskListServlet">
 		<input type = "submit" value="戻る">
 	</form>
 </body>
