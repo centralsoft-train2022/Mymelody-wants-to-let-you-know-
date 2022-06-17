@@ -7,9 +7,9 @@ import vo.TasksVo;
 
 public class DetailBean {
 	
-	private List<TasksVo> taskList1 = new ArrayList<TasksVo>();
+	private List<TasksVo> taskList = new ArrayList<TasksVo>();
 	private List<String> PicturePaths = new ArrayList<String>();
-	private List<TasksVo> taskList;
+	
 	private int Taskid;
 
 	public String getPicturePath(int index) {
@@ -30,11 +30,11 @@ public class DetailBean {
 	}
 
 	public List<TasksVo> getTaskList() {
-		return taskList1;
+		return taskList;
 	}
 
 	public void setTaskList(List<TasksVo> taskList) {
-		this.taskList1 = taskList;
+		this.taskList = taskList;
 	}
 	
 	
