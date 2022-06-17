@@ -29,8 +29,7 @@
 			</tr>
 		
 			<tr>
-				<!--<td><input type = 'submit' name = 'edit' value = 'タスク名'></td>-->
-				<!-- <td><%=bean.getTaskName() %></td> -->
+
 				<%
 				for(vo.TasksVo tv:bean.getTaskList())
 				{

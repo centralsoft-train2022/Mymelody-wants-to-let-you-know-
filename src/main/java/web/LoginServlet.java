@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.LoginBean;
 import dao.DBUtil;
@@ -37,7 +38,14 @@ public class LoginServlet extends HttpServlet {
 
 	private void display(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String username = request.getParameter("Mailaddress");
+		String mailaddress = request.getParameter("Password");
 
+		HttpSession session = request.getSession();
+		session.setAttribute( "username", username);
+		
+		
 		String fromjsp = request.getParameter("fromjsp");
 
 		if (fromjsp == null) {
@@ -53,6 +61,8 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private LoginBean getLoginBean() {
+		
+		
 
 		LoginBean bean = new LoginBean();
 
