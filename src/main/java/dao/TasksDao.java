@@ -95,6 +95,22 @@ public class TasksDao {
 			+ " WHERE\n"
 			+ " taskid = ?;";
 
+	private static final String UPDATE_SQL = ""
+			+ "UPDATE \n"
+			+ "	`tasks`\n"
+			+ " set taskname = ?"
+			+ " ,taskbody = ?"
+			+ " WHERE\n"
+			+ " taskid = ?;";
+	
+
+//	
+//	+ " ,set completed = ?"
+//	+ " ,set kigen = ?"
+//	+ " ,set needmail = ?"
+//	+ " ,set mailtime = ?"
+//	+ " ,set regular = ?"
+//	+ " ,set taskinterval = ?"
 	
 	public List<TasksVo> getAllTasks() {
 		List<TasksVo> list = new ArrayList<TasksVo>();
@@ -191,7 +207,7 @@ public class TasksDao {
 		/* ｓｑｌ実行 */
 		stmt.execute();
 	}
-public void insert(TasksVo data) {
+	public void insert(TasksVo data) {
 		try (PreparedStatement stmt = this.con.prepareStatement(INSERT_SQL)) {
 
 			stmt.setString(1, data.getTaskname());
@@ -207,9 +223,34 @@ public void insert(TasksVo data) {
 			stmt.setInt(11, data.getPictures_pictureid());
 
 			/* ｓｑｌ実行 */
-			int i = stmt.executeUpdate();
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 
-	}}
+	}
+	public void update(int id, String taskname, String taskdetail) {
+
+		try (PreparedStatement stmt = this.con.prepareStatement(UPDATE_SQL)) {
+			stmt.setString(1, taskname);
+			stmt.setString(2, taskdetail);
+			stmt.setInt(3, id);
+			
+			
+			
+			
+
+//			stmt.setString(3, data.getKigen());
+//			stmt.setBoolean(4, data.isNeedmail());
+//			stmt.setString(5, data.getMailtime());
+//			stmt.setBoolean(6, data.isRegular());
+//			stmt.setString(7, data.getTaskinterval());
+			
+			/* ｓｑｌ実行 */
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+}
