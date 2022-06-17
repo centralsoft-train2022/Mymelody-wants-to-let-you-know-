@@ -50,13 +50,67 @@ public class TasksDao {
 			+ " tasks"
 			+ " Where"
 			+ " taskid = ?";
-	
+
 	private static final String UPDATE_TaskAchievement = ""
 			+ "UPDATE \n"
 			+ "	tasks\n"
 			+ " set completed = True"
 			+ " WHERE\n"
 			+ " taskid = ?";
+
+	private static final String INSERT_SQL = ""
+			+ "insert\n"
+			+ "into tasks\n"
+			+ "(\n"
+			+ " taskname\n"
+			+ " ,taskbody\n"
+			+ " ,completed\n"
+			+ " ,kigen\n"
+			+ " ,needmail\n"
+			+ " ,mailtime\n"
+			+ " ,regular\n"
+			+ " ,taskinterval\n"
+			+ " ,taskvisible\n"
+			+ " ,users_userid\n"
+			+ " ,pictures_pictureid\n"
+			+ ")\n"
+			+ "values\n"
+			+ "(\n"
+			+ " ?"
+			+ ",?"
+			+ ",?"
+			+ ",?"
+			+ ",?"
+			+ ",?"
+			+ ",?"
+			+ ",?"
+			+ ",?"
+			+ ",?"
+			+ ",?"
+			+ ")";
+
+	private static final String DELETE_Task = ""
+			+ "DELETE \n"
+			+ "	FROM `tasks`\n"
+			+ " WHERE\n"
+			+ " taskid = ?;";
+
+	private static final String UPDATE_SQL = ""
+			+ "UPDATE \n"
+			+ "	`tasks`\n"
+			+ " set taskname = ?"
+			+ " ,taskbody = ?"
+			+ " WHERE\n"
+			+ " taskid = ?;";
+	
+
+//	
+//	+ " ,set completed = ?"
+//	+ " ,set kigen = ?"
+//	+ " ,set needmail = ?"
+//	+ " ,set mailtime = ?"
+//	+ " ,set regular = ?"
+//	+ " ,set taskinterval = ?"
 	
 	public List<TasksVo> getAllTasks() {
 		List<TasksVo> list = new ArrayList<TasksVo>();
@@ -95,14 +149,14 @@ public class TasksDao {
 		return list;
 
 	}
-	
+
 	public List<TasksVo> getExtractTasks(int num) {
 		List<TasksVo> list = new ArrayList<TasksVo>();
 
 		try (PreparedStatement stmt = this.con.prepareStatement(Extract_AllTASKS_SQL)) {
 
 			// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
-			stmt.setInt( 1, num );
+			stmt.setInt(1, num);
 			/* ｓｑｌ実行 */
 			try (ResultSet rset = stmt.executeQuery();) {
 
@@ -133,17 +187,70 @@ public class TasksDao {
 		return list;
 
 	}
-	
+
 	public void TaskAchievement(int num) throws SQLException {
 
 		PreparedStatement stmt = this.con.prepareStatement(UPDATE_TaskAchievement);
 
 		// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
+		stmt.setInt(1, num);
+		/* ｓｑｌ実行 */
+		stmt.execute();
+	}
+	
+	public void DeleteTask(int num) throws SQLException {
+
+		PreparedStatement stmt = this.con.prepareStatement(DELETE_Task);
+
+		// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
 		stmt.setInt( 1, num );
 		/* ｓｑｌ実行 */
 		stmt.execute();
-		System.out.println(num);
-		
 	}
+	public void insert(TasksVo data) {
+		try (PreparedStatement stmt = this.con.prepareStatement(INSERT_SQL)) {
 
+			stmt.setString(1, data.getTaskname());
+			stmt.setString(2, data.getTaskbody());
+			stmt.setBoolean(3, data.isCompleted());
+			stmt.setString(4, data.getKigen());
+			stmt.setBoolean(5, data.isNeedmail());
+			stmt.setString(6, data.getMailtime());
+			stmt.setBoolean(7, data.isRegular());
+			stmt.setString(8, data.getTaskinterval());
+			stmt.setBoolean(9, data.isTaskvisible());
+			stmt.setInt(10, data.getUsers_userid());
+			stmt.setInt(11, data.getPictures_pictureid());
+
+			/* ｓｑｌ実行 */
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+	public void update(int id, String taskname, String taskdetail) {
+
+		try (PreparedStatement stmt = this.con.prepareStatement(UPDATE_SQL)) {
+			stmt.setString(1, taskname);
+			stmt.setString(2, taskdetail);
+			stmt.setInt(3, id);
+			
+			
+			
+			
+
+//			stmt.setString(3, data.getKigen());
+//			stmt.setBoolean(4, data.isNeedmail());
+//			stmt.setString(5, data.getMailtime());
+//			stmt.setBoolean(6, data.isRegular());
+//			stmt.setString(7, data.getTaskinterval());
+			
+			/* ｓｑｌ実行 */
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
 }

@@ -25,7 +25,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
 		display(request, response);
 	}
 
@@ -66,6 +65,17 @@ public class LoginServlet extends HttpServlet {
 
 		LoginBean bean = new LoginBean();
 
+		List<PicturesVo> pictureList = getPictures();
+
+		Random r = new Random();
+
+		bean.addPicturePath(pictureList.get(r.nextInt(0, pictureList.size() - 1)).getPath());
+		return bean;
+
+	}
+
+	private List<PicturesVo> getPictures() {
+
 		DBUtil db = new DBUtil();
 
 		List<PicturesVo> pictureList = new ArrayList<PicturesVo>();
@@ -75,14 +85,11 @@ public class LoginServlet extends HttpServlet {
 			PicturesDao dao = new PicturesDao(c);
 
 			pictureList = dao.getMymelodies();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		
-		Random r = new Random();
 
-		bean.setImageFileName(pictureList.get(r.nextInt(0, pictureList.size()-1)).getPath());
-		return bean;
-
+		return pictureList;
 	}
 }

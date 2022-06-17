@@ -43,7 +43,6 @@ public class DetailServlet extends HttpServlet
 		List<PicturesVo> pictureList = getMajorCharacters();
 		for(PicturesVo pv:pictureList) {
 			bean.addPicturePath(pv.getPath());}
-		
 		request.setAttribute("bean", bean);
 
 		//JSPに遷移する
