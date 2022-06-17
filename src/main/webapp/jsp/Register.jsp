@@ -41,7 +41,9 @@
 		</dl>
 		<input type="submit" value="登録！">
 	</form>
-	
+	<form  method="POST" action="TaskListServlet">
+		<input type = "submit" value="戻る">
+	</form>
 	
 </body>
 </html>
