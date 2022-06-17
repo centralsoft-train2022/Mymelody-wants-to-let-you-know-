@@ -47,6 +47,10 @@
 		<button type='submit' name='id' value="<%=bean.getTaskid() %>">達成</button>
 		<br>
 	</form>
+	<form method="POST" action="DeleteServlet">
+		<button type='submit' name='delete' value="<%=bean.getTaskid() %>">削除</button>
+		<br>
+	</form>
 	<h1>設定変更</h1>
 	<form method="POST" action="DetailDataServlet">
 		<p>
