@@ -32,7 +32,7 @@
 				<!--<td><input type = 'submit' name = 'edit' value = 'タスク名'></td>-->
 				<!-- <td><%=bean.getTaskName() %></td> -->
 				<%
-				for(Vo.TasksVo tv:bean.getTaskList())
+				for(vo.TasksVo tv:bean.getTaskList())
 				{
 				%>
 				<tr>

@@ -1,4 +1,4 @@
-package Vo;
+package vo;
 
 public class PicturesVo {
 
@@ -7,8 +7,6 @@ public class PicturesVo {
 	private String characterName;
 	private String fileName;
 	private int charactertype;
-
-	
 	
 	public String getPath() {
 		return path;

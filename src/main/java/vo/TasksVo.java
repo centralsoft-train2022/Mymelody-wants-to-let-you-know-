@@ -1,4 +1,4 @@
-package Vo;
+package vo;
 
 /* Code Generator Information.
  * generator Version 1.0.0 release 2007/10/10
@@ -22,6 +22,7 @@ public class TasksVo implements Serializable {
 	private boolean taskvisible;
 	private int users_userid;
 	private int pictures_pictureid;
+	private boolean alreadysend;
 
 	/**
 	* Constractor
@@ -31,9 +32,14 @@ public class TasksVo implements Serializable {
 	* Constractor
 	* @param <code>employeeid</code>
 	*/
+
+	public TasksVo() {
+		super();
+	}
+
 	public TasksVo(int taskid, String taskname, String taskbody, boolean completed, String kigen, boolean needmail,
 			String mailtime, boolean regular, String taskinterval, boolean taskvisible, int users_userid,
-			int pictures_pictureid) {
+			int pictures_pictureid, boolean alreadysend) {
 		super();
 		this.taskid = taskid;
 		this.taskname = taskname;
@@ -47,10 +53,6 @@ public class TasksVo implements Serializable {
 		this.taskvisible = taskvisible;
 		this.users_userid = users_userid;
 		this.pictures_pictureid = pictures_pictureid;
-	}
-
-	public TasksVo() {
-		super();
 	}
 
 	public int getTaskid() {
@@ -192,6 +194,14 @@ public class TasksVo implements Serializable {
 		buffer.append(pictures_pictureid);
 		buffer.append("\n]");
 		return buffer.toString();
+	}
+
+	public boolean isAlreadysend() {
+		return alreadysend;
+	}
+
+	public void setAlreadysend(boolean alreadysend) {
+		this.alreadysend = alreadysend;
 	}
 
 }
