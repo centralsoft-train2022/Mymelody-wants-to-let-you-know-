@@ -38,16 +38,11 @@ public class DetailServlet extends HttpServlet
 		List<TasksVo>  taskList = getTasksVo(num);
 		DetailBean bean = new DetailBean();		
 		bean.setTaskList(taskList);
-<<<<<<< HEAD
 		bean.setTaskid(num);
-
-=======
 		
 		List<PicturesVo> pictureList = getMajorCharacters();
 		for(PicturesVo pv:pictureList) {
 			bean.addPicturePath(pv.getPath());}
-		
->>>>>>> d2500339caeb33f09b0e6aeabd0cd2e13c9646b9
 		request.setAttribute("bean", bean);
 
 		//JSPに遷移する

@@ -43,7 +43,6 @@
 		
 	
 	</table>
-	
 	<form  method="POST" action="CelebrationServlet">
 		<button type = 'submit' name = 'id' value ="<%=bean.getTaskid() %>">達成</button><br>
 	</form>
