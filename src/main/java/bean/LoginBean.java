@@ -1,13 +1,16 @@
 package bean;
 
-public class LoginBean {
-	private String ImageFileName;
+import java.util.ArrayList;
+import java.util.List;
 
-	public String getImageFileName() {
-		return ImageFileName;
+public class LoginBean {
+	private List<String> PicturePaths = new ArrayList<String>();
+
+	public String getPicturePath(int index) {
+		return PicturePaths.get(index);
 	}
 
-	public void setImageFileName(String ImageFileName) {
-		this.ImageFileName = ImageFileName;
+	public void addPicturePath(String picturePath) {
+		PicturePaths.add(picturePath);
 	}
 }
