@@ -184,7 +184,7 @@ public class TasksDao {
 	
 	public void DeleteTask(int num) throws SQLException {
 
-PreparedStatement stmt = this.con.prepareStatement(DELETE_Task);
+		PreparedStatement stmt = this.con.prepareStatement(DELETE_Task);
 
 		// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
 		stmt.setInt( 1, num );
