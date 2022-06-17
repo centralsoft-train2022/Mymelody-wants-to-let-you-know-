@@ -39,17 +39,23 @@
 			<td><%=tv.isNeedmail()%></td>
 			<td><%=tv.getTaskinterval()%></td>
 		</tr>
-		<% }%>
+		
 		
 	
 	</table>
 	<form  method="POST" action="CelebrationServlet">
 		<button type = 'submit' name = 'id' value ="<%=bean.getTaskid() %>">達成</button><br>
 	</form>
+	
+	<form  method="POST" action="DeleteServlet">
+		<button type = 'submit' name = 'delete' value ="<%=bean.getTaskid() %>">削除</button><br>
+	</form>
+	
 	<h1>設定変更</h1>
 	<p>・タスク名変更<br>
-		<input type="text" name="name">
+		<input type="text" name="name" value='<%=tv.getTaskname()%>'>
 	</p>
+	<% System.out.println("a");}%>
 	<p>・メール送信日時変更<br>
 		<input type="datetime-local" name="date">
 	</p>
