@@ -88,8 +88,8 @@ public class RegisteredServlet extends HttpServlet {
 			throw new RuntimeException(e);
 		}
 
-		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/html/Cheer.html");
+		//JSPに遷移する(6/20現在サーブレット遷移してます)
+		RequestDispatcher disp = request.getRequestDispatcher("CheerServlet");
 		disp.forward(request, response);
 	}
 
