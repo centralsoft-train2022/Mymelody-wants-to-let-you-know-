@@ -29,11 +29,9 @@ public class TaskListServlet extends HttpServlet {
 		// 社員リストwoDBから取得 課題
 //		EmployeesVo  emp = getEmployeesVo("aaaaa");//テストデータ（１つの場合）
 		List<TasksVo> taskList = getAllTasks();
-
 		
-
 		TaskListBean bean = new TaskListBean();
-
+		
 		bean.setTaskList(taskList);
 		
 		List<PicturesVo> pictureList = getMajorCharacters();
