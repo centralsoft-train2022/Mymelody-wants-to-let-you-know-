@@ -4,7 +4,7 @@ public class UsersVo {
 
 	private int userid;
 	private String username;
-	private String oassword;
+	private String password;
 	private String mailaddress;
 
 	public int getUserid() {
@@ -23,12 +23,12 @@ public class UsersVo {
 		this.username = username;
 	}
 
-	public String getOassword() {
-		return oassword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setOassword(String oassword) {
-		this.oassword = oassword;
+	public void setPassword(String oassword) {
+		this.password = oassword;
 	}
 
 	public String getMailaddress() {
