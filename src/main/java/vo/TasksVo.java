@@ -37,39 +37,25 @@ public class TasksVo implements Serializable {
 		super();
 	}
 
-	public TasksVo(int taskid, String taskname, String taskbody, boolean completed, String kigen, boolean needmail,
-			String mailtime, boolean regular, String taskinterval, boolean taskvisible, int users_userid,
-			int pictures_pictureid, boolean alreadysend) {
+	public TasksVo(String taskname, String taskbody, String kigen, boolean needmail,
+			String mailtime, boolean regular, String taskinterval, int users_userid,
+			int pictures_pictureid) {
 		super();
-		this.taskid = taskid;
 		this.taskname = taskname;
 		this.taskbody = taskbody;
-		this.completed = completed;
+		this.completed = false;
 		this.kigen = kigen;
 		this.needmail = needmail;
 		this.mailtime = mailtime;
 		this.regular = regular;
 		this.taskinterval = taskinterval;
-		this.taskvisible = taskvisible;
+		this.taskvisible = true;
 		this.users_userid = users_userid;
 		this.pictures_pictureid = pictures_pictureid;
+		this.alreadysend = false;
 	}
 
-	public TasksVo(String taskname, String taskbody, boolean completed, String kigen, boolean needmail, String mailtime,
-			boolean regular, String taskinterval, boolean taskvisible, int users_userid, int pictures_pictureid) {
-		super();
-		this.taskname = taskname;
-		this.taskbody = taskbody;
-		this.completed = completed;
-		this.kigen = kigen;
-		this.needmail = needmail;
-		this.mailtime = mailtime;
-		this.regular = regular;
-		this.taskinterval = taskinterval;
-		this.taskvisible = taskvisible;
-		this.users_userid = users_userid;
-		this.pictures_pictureid = pictures_pictureid;
-	}
+
 
 	public int getTaskid() {
 		return taskid;

@@ -32,7 +32,7 @@ public class TaskListServlet extends HttpServlet {
 		List<TasksVo> taskList = getAllTasks();
 
 		TaskListBean bean = new TaskListBean();
-
+		
 		bean.setTaskList(taskList);
 
 		List<PicturesVo> pictureList = getMajorCharacters();
