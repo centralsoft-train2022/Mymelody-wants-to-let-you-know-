@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import bean.LoginBean;
 import dao.DBUtil;
@@ -21,9 +20,7 @@ import dao.PicturesDao;
 import vo.PicturesVo;
 
 @WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
-	
-	
+public class LoginServlet extends HttpServlet {	
 	
 	protected void doGet(
 			HttpServletRequest request,
@@ -41,11 +38,14 @@ public class LoginServlet extends HttpServlet {
 	private void display(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String username = request.getParameter("Mailaddress");
-		String mailaddress = request.getParameter("Password");
+		String mailaddress = request.getParameter("Mailaddress");
+		String password = request.getParameter("Password");
+		
+		//ここでユーザー認証を行いusersVoを取得
 
-		HttpSession session = request.getSession();
-		session.setAttribute( "username", username);
+		//セッションにログイン情報を保存
+//		HttpSession session = request.getSession();
+//		session.setAttribute( "usersVo", usersVo);
 		
 		
 		String fromjsp = request.getParameter("fromjsp");
