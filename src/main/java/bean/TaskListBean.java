@@ -7,9 +7,20 @@ import vo.TasksVo;
 
 public class TaskListBean
 {
-	private String TaskName;
+	
+	private String userName;
 	private List<TasksVo> taskList = new ArrayList<TasksVo>();
 	private List<String> PicturePaths = new ArrayList<String>();
+
+	
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public String getPicturePath(int index) {
 		return PicturePaths.get(index);
@@ -17,14 +28,6 @@ public class TaskListBean
 
 	public void addPicturePath(String picturePath) {
 		PicturePaths.add(picturePath);
-	}
-
-	public String getTaskName() {
-		return TaskName;
-	}
-
-	public void setTaskName(String TaskName) {
-		this.TaskName = TaskName;
 	}
 
 	public List<TasksVo> getTaskList() {

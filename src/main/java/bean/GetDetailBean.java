@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetDetailBean {
+	
+	private String userName;
 	private String taskname;
 	private String mailtime;
 	private boolean needmail;
@@ -11,6 +13,14 @@ public class GetDetailBean {
 	private List<String> PicturePaths = new ArrayList<String>();
 	
 	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public String getPicturePath(int index) {
 		return PicturePaths.get(index);

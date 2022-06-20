@@ -23,8 +23,8 @@
 	<div class="box1">
 		<form action="LoginServlet" method="post">
 
-			ユーザー名<input name="ID" type="text"><br>
-			パスワード<input name="PW" type ="text"><br>
+			ユーザー名<input name="Mailaddress" type="text"><br>
+			パスワード<input name="Password" type ="text"><br>
 			 <input type="submit" value="ログイン">
 			 <input type = "hidden" name = "fromjsp" value = "loginjsp">
 		</form>

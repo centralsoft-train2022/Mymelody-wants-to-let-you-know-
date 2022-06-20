@@ -192,8 +192,7 @@ public class TasksDao {
 
 		PreparedStatement stmt = this.con.prepareStatement(UPDATE_TaskAchievement);
 
-		// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
-		stmt.setInt(1, num);
+				stmt.setInt(1, num);
 		/* ｓｑｌ実行 */
 		stmt.execute();
 	}
@@ -202,7 +201,6 @@ public class TasksDao {
 
 		PreparedStatement stmt = this.con.prepareStatement(DELETE_Task);
 
-		// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
 		stmt.setInt( 1, num );
 		/* ｓｑｌ実行 */
 		stmt.execute();

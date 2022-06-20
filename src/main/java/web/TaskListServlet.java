@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.TaskListBean;
 import dao.DBUtil;
@@ -39,10 +40,9 @@ public class TaskListServlet extends HttpServlet {
 		for(PicturesVo pv:pictureList) {
 		bean.addPicturePath(pv.getPath());}
 
-//		//セッションからログインユーザーを取得
-//		HttpSession session = request.getSession();
-//	    TasksVo tsk  = (TasksVo)session.getAttribute("TasksVo");
-		// String peStr = (String)session.getAttribute("password");
+		//セッションからログインユーザーを取得
+		HttpSession session = request.getSession();
+	    String username  = (String)session.getAttribute("username");
 
 		request.setAttribute("bean", bean);
 
@@ -67,34 +67,12 @@ public class TaskListServlet extends HttpServlet {
 		}
 		return pictureList;
 	}
-	/*
-	 * //DBから従業員を取得する private EmployeesVo getEmployeesVo( String TaskName) {
-	 * 
-	 * //DBから従業員を取得 仮実装 // DBUtil db = new DBUtil( ); // try( Connection c =
-	 * db.getConnection( ); ) // { // EmployeesDao dao = new EmployeesDao( c ); //
-	 * empList = dao.getAllEmployees(); // } // catch( SQLException e ) // { //
-	 * throw new RuntimeException( e ); // }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * //テストデータ EmployeesVo emp = new EmployeesVo(); emp.setEmployeename(TaskName);
-	 * 
-	 * return emp; }
-	 */
+
 
 	private static List<TasksVo> getAllTasks() {
 
-//		List<TasksVo> tskList = null;
 
-		// ここにDBアクセス処理を作ってみましょう。 課題
-
-		// 仮実装 あとで消す
 		List<TasksVo> tskList = new ArrayList<TasksVo>();
-
-		// TasksVo t1 = new TasksVo(0, null, null, false, null, false, null, false,
-		// null, false, 0, 0);
-//		TasksVo t2 = new TasksVo(0, null, null, false, null, false, null, false, null, false, 0, 0);
 
 		DBUtil db = new DBUtil();
 
@@ -106,17 +84,6 @@ public class TaskListServlet extends HttpServlet {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
-		/*
-		 * t1.setTaskid(1); t2.setTaskid(2);
-		 * 
-		 * t1.setTaskname("課題1"); t2.setTaskname("課題2");
-		 * 
-		 * t1.setCompleted(false); t2.setCompleted(true);
-		 * 
-		 * tskList.add(t1); tskList.add(t2);
-		 */
-		// 仮実装終わり
 
 		return tskList;
 	}

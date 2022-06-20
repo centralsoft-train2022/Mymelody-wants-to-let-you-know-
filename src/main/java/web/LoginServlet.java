@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.LoginBean;
 import dao.DBUtil;
@@ -21,6 +22,9 @@ import vo.PicturesVo;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
+	
+	
+	
 	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +40,14 @@ public class LoginServlet extends HttpServlet {
 
 	private void display(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String username = request.getParameter("Mailaddress");
+		String mailaddress = request.getParameter("Password");
 
+		HttpSession session = request.getSession();
+		session.setAttribute( "username", username);
+		
+		
 		String fromjsp = request.getParameter("fromjsp");
 
 		if (fromjsp == null) {
