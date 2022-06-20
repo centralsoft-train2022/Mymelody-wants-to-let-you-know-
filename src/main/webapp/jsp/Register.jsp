@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+	ユーザー名:<%=bean.getUserName() %><br>
 <img src="pictures/<%=bean.getPicturePath(0) %>" title="キャラクター画像" class="image">
 	
 	<h1>登録画面</h1>
