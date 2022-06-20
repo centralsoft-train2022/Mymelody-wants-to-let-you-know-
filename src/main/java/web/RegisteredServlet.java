@@ -60,6 +60,10 @@ public class RegisteredServlet extends HttpServlet {
 			interval = null;
 		}
 
+		if (boolNeedmail == false) {
+			mailtime = null;
+		}
+
 		DBUtil db = new DBUtil();
 
 		try (Connection c = db.getConnection()) {

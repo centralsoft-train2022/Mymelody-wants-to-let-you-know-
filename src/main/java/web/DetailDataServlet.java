@@ -17,19 +17,10 @@ import dao.TasksDao;
 @WebServlet("/DetailDataServlet")
 public class DetailDataServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		DetailDataServlet(request, response);
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DetailDataServlet(request, response);
-	}
-
-	private void DetailDataServlet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+		
 		DBUtil db = new DBUtil();
 		try (Connection c = db.getConnection();) {
 

@@ -7,10 +7,21 @@ import vo.TasksVo;
 
 public class DetailBean {
 	
+	private String userName;
 	private List<TasksVo> taskList = new ArrayList<TasksVo>();
 	private List<String> PicturePaths = new ArrayList<String>();
 	
 	private int Taskid;
+	
+	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public String getPicturePath(int index) {
 		return PicturePaths.get(index);
