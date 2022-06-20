@@ -24,11 +24,11 @@
 			<th>期限</th>
 			<th>達成状況</th>
 			<th>メール送信日時</th>
-			<th>アラートメール送信</th>
 			<th>繰り返し期間</th>
 		</tr>
 
 		<tr>
+
 			<td><%=bean.getTask().getTaskname()%></td>
 			<td><%=bean.getTask().getTaskbody()%></td>
 			<td><%=bean.getTask().getKigen()%></td>

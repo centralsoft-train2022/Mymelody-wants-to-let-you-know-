@@ -36,9 +36,9 @@ public class RegisteredServlet extends HttpServlet {
 		TasksVo inputData = receiveInput(request,usersVo.getUserid());
 
 		sendDB(inputData);
-
-		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/html/Cheer.html");
+    
+    		//JSPに遷移する(6/20現在サーブレット遷移してます)
+		RequestDispatcher disp = request.getRequestDispatcher("CheerServlet");
 		disp.forward(request, response);
 	}
 

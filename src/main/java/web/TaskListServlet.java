@@ -20,6 +20,7 @@ import dao.PicturesDao;
 import dao.TasksDao;
 import vo.PicturesVo;
 import vo.TasksVo;
+import vo.UsersVo;
 
 @WebServlet("/TaskListServlet")
 public class TaskListServlet extends HttpServlet {
@@ -27,20 +28,23 @@ public class TaskListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 社員リストwoDBから取得 課題
-//		EmployeesVo  emp = getEmployeesVo("aaaaa");//テストデータ（１つの場合）
+		//		EmployeesVo  emp = getEmployeesVo("aaaaa");//テストデータ（１つの場合）
 		List<TasksVo> taskList = getAllTasks();
-		
+
 		TaskListBean bean = new TaskListBean();
 		
 		bean.setTaskList(taskList);
-		
+
 		List<PicturesVo> pictureList = getMajorCharacters();
-		for(PicturesVo pv:pictureList) {
-		bean.addPicturePath(pv.getPath());}
+		for (PicturesVo pv : pictureList) {
+			bean.addPicturePath(pv.getPath());
+		}
 
 		//セッションからログインユーザーを取得
 		HttpSession session = request.getSession();
-	    String username  = (String)session.getAttribute("username");
+		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
+
+		bean.setUserName(user.getUsername());
 
 		request.setAttribute("bean", bean);
 
@@ -51,7 +55,7 @@ public class TaskListServlet extends HttpServlet {
 
 	private List<PicturesVo> getMajorCharacters() {
 		List<PicturesVo> pictureList = new ArrayList<PicturesVo>();
-		
+
 		DBUtil db = new DBUtil();
 
 		try (Connection c = db.getConnection();) {
@@ -59,16 +63,14 @@ public class TaskListServlet extends HttpServlet {
 			PicturesDao dao = new PicturesDao(c);
 
 			pictureList = dao.getMajorCharacters();
-			
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		return pictureList;
 	}
 
-
 	private static List<TasksVo> getAllTasks() {
-
 
 		List<TasksVo> tskList = new ArrayList<TasksVo>();
 

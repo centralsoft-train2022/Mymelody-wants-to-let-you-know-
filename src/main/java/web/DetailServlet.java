@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.DetailBean;
 import dao.DBUtil;
@@ -17,19 +18,17 @@ import dao.PicturesDao;
 import dao.TasksDao;
 import vo.PicturesVo;
 import vo.TasksVo;
+import vo.UsersVo;
 
 @WebServlet("/DetailServlet")
-public class DetailServlet extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// 文字化け対策
+		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
 		// 押されたボタンのidを取得、Stringからintへの変換
 		String s = request.getParameter("edit");
 		int num = Integer.parseInt(s);
 
-		DetailBean bean = new DetailBean();
-		
+		bean.setTaskid(num);
+
 		TasksVo task = getTasksVo(num);
 		bean.setTask(task);
 		
@@ -45,8 +44,6 @@ public class DetailServlet extends HttpServlet {
 
 	private PicturesVo getPicture(int pictureid) {
 
-		DBUtil db = new DBUtil();
-		
 		PicturesVo pic;
 
 		try (Connection c = db.getConnection();) {
@@ -66,13 +63,10 @@ public class DetailServlet extends HttpServlet {
 		DBUtil db = new DBUtil();
 		TasksVo task;
 
-		try (Connection c = db.getConnection();) {
+		DBUtil db = new DBUtil();
 
-			TasksDao tdao = new TasksDao(c);
-
+			TasksDao tdao = new TasksDao( c );
 			task = tdao.getExtractTasks(num);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
 		}
 
 		return task;

@@ -31,7 +31,9 @@ public class TasksDao {
 			+ ",users_userid"
 			+ ",pictures_pictureid"
 			+ " from"
-			+ " tasks";
+			+ " tasks"
+			+ " Where"
+			+ " taskvisible = 0";
 
 	private static final String Extract_AllTASKS_SQL = "select "
 			+ " taskid"
@@ -90,10 +92,11 @@ public class TasksDao {
 			+ ")";
 
 	private static final String DELETE_Task = ""
-			+ "DELETE \n"
-			+ "	FROM `tasks`\n"
+			+ "UPDATE \n"
+			+ "	tasks\n"
+			+ " set taskvisible = 1"
 			+ " WHERE\n"
-			+ " taskid = ?;";
+			+ " taskid = ?";
 
 	private static final String UPDATE_SQL = ""
 			+ "UPDATE \n"

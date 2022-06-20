@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+	ユーザー名:<%=bean.getUserName() %><br>
 <img src="pictures/<%=bean.getPicturePath(0) %>" title="キャラクター画像" class="image">
 	<form  method="POST" action="RegisterServlet">
 	    <input type = 'submit' name = 'add' value = '新しいタスクを追加'>
@@ -23,20 +24,21 @@
 	<form  method="POST" action="DetailServlet" >
 		<table  border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333" class="box1">
 			<tr>
-				<th>タスクID</th>
+				<th>№</th>
 				<th>タスク名</th>
 				<th>達成状況</th>
 			</tr>
 		
 			<tr>
 
-				<%
+				<%int count = 0;
 				for(vo.TasksVo tv:bean.getTaskList())
 				{
+					count++;
 				%>
 				<tr>
 					<td>
-						<%=tv.getTaskid() %><br>
+						<%=count %><br>
 					</td>
 					<td>
 						<button type = 'submit' name = 'edit' value =<%=tv.getTaskid() %>><%=tv.getTaskname() %></button><br>
