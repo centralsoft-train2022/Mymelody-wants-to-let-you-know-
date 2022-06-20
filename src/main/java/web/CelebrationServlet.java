@@ -30,20 +30,6 @@ public class CelebrationServlet extends HttpServlet {
 		display(request, response);
 	}
 
-	private static void Taskachievement(int id) {
-
-		DBUtil db = new DBUtil();
-
-		try (Connection c = db.getConnection();) {
-
-			TasksDao tdao = new TasksDao(c);
-
-			tdao.TaskAchievement(id);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	private void display(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -59,6 +45,20 @@ public class CelebrationServlet extends HttpServlet {
 		request.setAttribute("bean", bean);
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Celebration.jsp");
 		disp.forward(request, response);
+	}
+
+	private static void Taskachievement(int id) {
+
+		DBUtil db = new DBUtil();
+
+		try (Connection c = db.getConnection();) {
+
+			TasksDao tdao = new TasksDao(c);
+
+			tdao.TaskAchievement(id);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private CelebrationBean getCelebrationBean() {
