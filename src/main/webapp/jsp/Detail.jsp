@@ -23,8 +23,8 @@
 			<th>タスク内容</th>
 			<th>期限</th>
 			<th>達成状況</th>
-			<th>メール送信日時</th>
 			<th>アラートメール送信</th>
+			<th>メール送信日時</th>
 			<th>繰り返し期間</th>
 		</tr>
 
@@ -37,9 +37,9 @@
 			<td><%=tv.getTaskbody()%></td>
 			<td><%=tv.getKigen()%></td>
 			<td><%=tv.isCompleted()? web.Comon.TRUE :web.Comon.FALSE %></td>
+			<td><%=tv.isNeedmail()? web.Comon.TRUE2 :web.Comon.FALSE2 %></td>
 			<td><%=tv.getMailtime()%></td>
-			<td><%=tv.isNeedmail()%></td>
-			<td><%=tv.getTaskinterval()%></td>
+			<td><%=tv.getTaskinterval() == null? web.Comon.NULL : tv.getTaskinterval()%></td>
 		</tr>
 	</table>
 	
