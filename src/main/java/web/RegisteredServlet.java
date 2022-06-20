@@ -3,6 +3,9 @@ package web;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.DBUtil;
+import dao.PicturesDao;
 import dao.TasksDao;
+import vo.PicturesVo;
 import vo.TasksVo;
+import vo.UsersVo;
 
 @WebServlet("/RegisteredServlet")
 public class RegisteredServlet extends HttpServlet {
@@ -21,7 +28,35 @@ public class RegisteredServlet extends HttpServlet {
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
+		//セッションからデータを取得
+		HttpSession session = request.getSession();
+	    UsersVo usersVo  = (UsersVo)session.getAttribute("usersVo");
+		
+		TasksVo inputData = receiveInput(request,usersVo.getUserid());
 
+		sendDB(inputData);
+
+		//JSPに遷移する
+		RequestDispatcher disp = request.getRequestDispatcher("/html/Cheer.html");
+		disp.forward(request, response);
+	}
+
+	private void sendDB(TasksVo inputData) {
+		DBUtil db = new DBUtil();
+
+		try (Connection c = db.getConnection()) {
+
+			TasksDao dao = new TasksDao(c);
+
+			dao.insert(inputData);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private TasksVo receiveInput(HttpServletRequest request, int userId) {
+		//入力を受け取る
 		String name = request.getParameter("name");
 		String detail = request.getParameter("detail");
 		String dateKigen = request.getParameter("datekigen");
@@ -43,19 +78,6 @@ public class RegisteredServlet extends HttpServlet {
 		String mailtime = dateMailtime + " " + timeMailtime;
 		String interval = "0000-" + month + "-" + day + " " + hour + ":" + min;
 
-		//入力データが取得できているかの確認表示
-		System.out.println(name);
-		System.out.println(detail);
-		System.out.println(kigen);
-		System.out.println(needmail);
-		System.out.println(mailtime);
-		System.out.println(regular);
-		System.out.println(interval);
-		System.out.println(month);
-		System.out.println(day);
-		System.out.println(hour);
-		System.out.println(min);
-
 		if (boolRegular == false) {
 			interval = null;
 		}
@@ -63,34 +85,44 @@ public class RegisteredServlet extends HttpServlet {
 		if (boolNeedmail == false) {
 			mailtime = null;
 		}
+		
+		return new TasksVo(
+				name,
+				detail,
+				kigen,
+				boolNeedmail,
+				mailtime,
+				boolRegular,
+				interval,
+				userId,
+				getRandomMajorCharacter().getPictureId());
+		
+	}
+	
+	private PicturesVo getRandomMajorCharacter() {
+		
+		List<PicturesVo> pictureList = getMajorCharacters();
+		Random r = new Random();
+		
+		return pictureList.get(r.nextInt(0,pictureList.size()-1));
+		
+	}
 
+	private List<PicturesVo> getMajorCharacters() {
+		List<PicturesVo> pictureList = new ArrayList<PicturesVo>();
+		
 		DBUtil db = new DBUtil();
 
-		try (Connection c = db.getConnection()) {
+		try (Connection c = db.getConnection();) {
 
-			TasksDao dao = new TasksDao(c);
+			PicturesDao dao = new PicturesDao(c);
 
-			TasksVo data = new TasksVo(
-					name,
-					detail,
-					false,
-					kigen,
-					boolNeedmail,
-					mailtime,
-					boolRegular,
-					interval,
-					false,
-					1,
-					1);
-
-			dao.insert(data);
+			pictureList = dao.getMajorCharacters();
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
-		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/html/Cheer.html");
-		disp.forward(request, response);
+		return pictureList;
 	}
 
 }
