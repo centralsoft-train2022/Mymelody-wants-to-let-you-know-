@@ -26,8 +26,22 @@ public class CelebrationServlet extends HttpServlet {
 	protected void doPost(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		CelebrationBean bean = getCelebrationBean();
+
 		//文字化け対策
-		display(request, response);
+		request.setCharacterEncoding("UTF-8");
+		
+		//押されたボタンのidを取得、Stringからintへの変換
+		String s = request.getParameter("id");
+		int num = Integer.parseInt(s);
+		Taskachievement(num);
+
+		//JSPに遷移する
+		request.setAttribute("bean", bean);
+		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Celebration.jsp");
+		disp.forward(request, response);
+		
 	}
 
 	private static void Taskachievement(int id) {
@@ -44,22 +58,6 @@ public class CelebrationServlet extends HttpServlet {
 		}
 	}
 
-	private void display(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		CelebrationBean bean = getCelebrationBean();
-
-		request.setCharacterEncoding("UTF-8");
-		//押されたボタンのidを取得、Stringからintへの変換
-		String s = request.getParameter("id");
-		int num = Integer.parseInt(s);
-		Taskachievement(num);
-
-		//JSPに遷移する
-		request.setAttribute("bean", bean);
-		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Celebration.jsp");
-		disp.forward(request, response);
-	}
 
 	private CelebrationBean getCelebrationBean() {
 		CelebrationBean bean = new CelebrationBean();

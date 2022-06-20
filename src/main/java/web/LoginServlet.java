@@ -22,6 +22,9 @@ import vo.PicturesVo;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
+	
+	
+	
 	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -60,8 +63,6 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private LoginBean getLoginBean() {
-		
-		
 
 		LoginBean bean = new LoginBean();
 
