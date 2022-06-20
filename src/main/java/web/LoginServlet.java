@@ -13,18 +13,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import bean.LoginBean;
 import dao.DBUtil;
 import dao.PicturesDao;
+import dao.UsersDao;
 import vo.PicturesVo;
+import vo.UsersVo;
 
 @WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
-	
-	
-	
+public class LoginServlet extends HttpServlet {	
+  
 	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -40,25 +39,36 @@ public class LoginServlet extends HttpServlet {
 
 	private void display(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String username = request.getParameter("Mailaddress");
-		String mailaddress = request.getParameter("Password");
+    
+		String mailaddress = request.getParameter("Mailaddress");
+		String password = request.getParameter("Password");
 
-		HttpSession session = request.getSession();
-		session.setAttribute( "username", username);
-		
-		
-		String fromjsp = request.getParameter("fromjsp");
+		DBUtil db = new DBUtil();
 
-		if (fromjsp == null) {
-			LoginBean bean = getLoginBean();
+		try (Connection c = db.getConnection()) {
 
-			request.setAttribute("bean", bean);
-			RequestDispatcher disp = request.getRequestDispatcher("jsp/Login.jsp");
-			disp.forward(request, response);
-		} else {
-			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
-			disp.forward(request, response);
+			UsersDao dao = new UsersDao(c);
+			UsersVo user = dao.getUser(mailaddress);
+
+			HttpSession session = request.getSession();
+			session.setAttribute("UsersVo", user);
+
+			String fromjsp = request.getParameter("fromjsp");
+
+			if (fromjsp == null) {
+				LoginBean bean = getLoginBean();
+				request.setAttribute("bean", bean);
+				
+				RequestDispatcher disp = request.getRequestDispatcher("jsp/Login.jsp");
+				disp.forward(request, response);
+			} else {
+				RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
+				disp.forward(request, response);
+			}
+		}
+
+		catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

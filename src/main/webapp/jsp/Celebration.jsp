@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+	ユーザー名:<%=bean.getUserName() %><br>
 	<img src="pictures/<%=bean.getPicturePath(0) %>" title="キャラクター画像" class="image">
 	<form method="POST" action="TaskListServlet">
 		<h1>お祝い画面</h1>
