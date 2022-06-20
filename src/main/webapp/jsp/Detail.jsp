@@ -37,7 +37,7 @@
 			<td><%=tv.getTaskbody()%></td>
 			<td><%=tv.getKigen()%></td>
 			<td><%=tv.isCompleted()? web.Comon.TRUE :web.Comon.FALSE %></td>
-			<td><%=tv.getKigen()%></td>
+			<td><%=tv.getMailtime()%></td>
 			<td><%=tv.isNeedmail()%></td>
 			<td><%=tv.getTaskinterval()%></td>
 		</tr>
