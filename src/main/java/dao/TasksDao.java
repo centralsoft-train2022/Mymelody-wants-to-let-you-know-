@@ -150,11 +150,12 @@ public class TasksDao {
 
 	}
 
-	public List<TasksVo> getExtractTasks(int num) {
-		List<TasksVo> list = new ArrayList<TasksVo>();
+	public TasksVo getExtractTasks(int num) {
+		
+		TasksVo task = new TasksVo();
 
 		try (PreparedStatement stmt = this.con.prepareStatement(Extract_AllTASKS_SQL)) {
-
+			
 			// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
 			stmt.setInt(1, num);
 			/* ｓｑｌ実行 */
@@ -162,7 +163,7 @@ public class TasksDao {
 
 				/* 取得したデータをEmployeesVoのインスタンスにまとめます */
 				while (rset.next()) {
-					TasksVo task = new TasksVo();
+					
 					// em.setEmployeeid( rset.getInt("EMPLOYEEID") );
 					task.setTaskid(rset.getInt(1));
 					task.setTaskname(rset.getString(2));
@@ -176,16 +177,14 @@ public class TasksDao {
 					task.setTaskvisible(rset.getBoolean(10));
 					task.setUsers_userid(rset.getInt(11));
 					task.setPictures_pictureid(rset.getInt(12));
-					list.add(task);
 				}
 
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
-		return list;
-
+		
+		return task;
 	}
 
 	public void TaskAchievement(int num) throws SQLException {

@@ -39,4 +39,12 @@ public class UsersVo {
 		this.mailaddress = mailaddress;
 	}
 
+	@Override
+	public String toString() {
+		return "UsersVo [userid=" + userid + ", username=" + username + ", password=" + password + ", mailaddress="
+				+ mailaddress + "]";
+	}
+	
+	
+
 }
