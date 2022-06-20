@@ -3,7 +3,7 @@ package bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginBean {
+public class CelebrationBean {
 	private List<String> PicturePaths = new ArrayList<String>();
 
 	public String getPicturePath(int index) {
