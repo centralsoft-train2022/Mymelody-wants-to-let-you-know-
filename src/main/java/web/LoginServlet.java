@@ -58,16 +58,11 @@ public class LoginServlet extends HttpServlet {
 
 			if (fromjsp == null) {
 				LoginBean bean = getLoginBean();
-
 				request.setAttribute("bean", bean);
+				
 				RequestDispatcher disp = request.getRequestDispatcher("jsp/Login.jsp");
 				disp.forward(request, response);
 			} else {
-				LoginBean bean = new LoginBean();
-				bean.setUserName(user.getUsername());
-
-				request.setAttribute("bean", bean);
-
 				RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
 				disp.forward(request, response);
 			}
