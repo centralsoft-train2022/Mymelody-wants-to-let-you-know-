@@ -37,6 +37,10 @@ public class DetailServlet extends HttpServlet {
 
 		PicturesVo pic = getPicture(task.getPictures_pictureid());
 		bean.addPicturePath(pic.getPath());
+		
+		HttpSession session = request.getSession();
+		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
+		bean.setUserName(user.getUsername());
 
 		HttpSession session = request.getSession();
 		UsersVo user = (UsersVo) session.getAttribute("UsersVo");

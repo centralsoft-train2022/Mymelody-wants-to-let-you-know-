@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<jsp:useBean id="bean" class="bean.CheerBean" scope="request"/>
+<jsp:useBean id="bean" class="bean.CheerBean" scope="request" />
 
 <!DOCTYPE html>
 <html>
@@ -14,8 +14,11 @@
 </head>
 
 <body>
-	ユーザー名:<%=bean.getUserName() %><br>
-	<img src="pictures/<%=bean.getPicturePath(0) %>" title="キャラクター画像" class="image">
+	<div class="username">
+		ユーザー名:<%=bean.getUserName()%>
+	</div>
+	<img src="pictures/<%=bean.getPicturePath(0)%>" title="キャラクター画像"
+		class="image">
 	<form method="POST" action="TaskListServlet">
 		がんばれ！！<input type="submit" value="一覧表示画面に戻るよ！">
 	</form>

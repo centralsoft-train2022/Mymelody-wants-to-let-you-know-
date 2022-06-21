@@ -33,9 +33,9 @@ public class CheerServlet extends HttpServlet {
 		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
 
+		//usernameをBeanに渡す
 		HttpSession session = request.getSession();
 		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
-
 		bean.setUserName(user.getUsername());
 
 		//JSPに遷移する
