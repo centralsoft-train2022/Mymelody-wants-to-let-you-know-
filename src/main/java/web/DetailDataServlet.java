@@ -32,7 +32,9 @@ public class DetailDataServlet extends HttpServlet {
 			String taskname = request.getParameter("taskname");
 
 			String taskdetail = request.getParameter("taskdetail");
-			tsksdao.update(taskid, taskname, taskdetail);//後でbeanにまとめてupdate関数に渡す
+			
+			String kigen = request.getParameter("tasktime");
+			tsksdao.update(taskid, taskname, taskdetail, kigen);//後でbeanにまとめてupdate関数に渡す
 
 			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
 			disp.forward(request, response);

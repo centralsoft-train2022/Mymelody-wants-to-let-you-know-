@@ -103,13 +103,14 @@ public class TasksDao {
 			+ "	`tasks`\n"
 			+ " set taskname = ?"
 			+ " ,taskbody = ?"
+			+ " ,kigen = ?"
 			+ " WHERE\n"
 			+ " taskid = ?;";
 	
 
 //	
 //	+ " ,set completed = ?"
-//	+ " ,set kigen = ?"
+//	
 //	+ " ,set needmail = ?"
 //	+ " ,set mailtime = ?"
 //	+ " ,set regular = ?"
@@ -229,12 +230,13 @@ public class TasksDao {
 		}
 
 	}
-	public void update(int id, String taskname, String taskdetail) {
+	public void update(int id, String taskname, String taskdetail, String kigen) {
 
 		try (PreparedStatement stmt = this.con.prepareStatement(UPDATE_SQL)) {
 			stmt.setString(1, taskname);
 			stmt.setString(2, taskdetail);
-			stmt.setInt(3, id);
+			stmt.setString(3,kigen);
+			stmt.setInt(4, id);
 			
 			
 			
