@@ -103,17 +103,10 @@ public class TasksDao {
 			+ "	`tasks`\n"
 			+ " set taskname = ?"
 			+ " ,taskbody = ?"
+			+ " ,kigen = ?"
 			+ " WHERE\n"
 			+ " taskid = ?;";
-
-	//	
-	//	+ " ,set completed = ?"
-	//	+ " ,set kigen = ?"
-	//	+ " ,set needmail = ?"
-	//	+ " ,set mailtime = ?"
-	//	+ " ,set regular = ?"
-	//	+ " ,set taskinterval = ?"
-
+  
 	public List<TasksVo> getAllTasks() {
 		List<TasksVo> list = new ArrayList<TasksVo>();
 
@@ -152,11 +145,12 @@ public class TasksDao {
 
 	}
 
-	public List<TasksVo> getExtractTasks(int num) {
-		List<TasksVo> list = new ArrayList<TasksVo>();
+	public TasksVo getExtractTasks(int num) {
+		
+		TasksVo task = new TasksVo();
 
 		try (PreparedStatement stmt = this.con.prepareStatement(Extract_AllTASKS_SQL)) {
-
+			
 			// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
 			stmt.setInt(1, num);
 			/* ｓｑｌ実行 */
@@ -164,7 +158,7 @@ public class TasksDao {
 
 				/* 取得したデータをEmployeesVoのインスタンスにまとめます */
 				while (rset.next()) {
-					TasksVo task = new TasksVo();
+					
 					// em.setEmployeeid( rset.getInt("EMPLOYEEID") );
 					task.setTaskid(rset.getInt(1));
 					task.setTaskname(rset.getString(2));
@@ -178,16 +172,14 @@ public class TasksDao {
 					task.setTaskvisible(rset.getBoolean(10));
 					task.setUsers_userid(rset.getInt(11));
 					task.setPictures_pictureid(rset.getInt(12));
-					list.add(task);
 				}
 
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
-		return list;
-
+		
+		return task;
 	}
 
 	public void TaskAchievement(int num) throws SQLException {
@@ -230,20 +222,15 @@ public class TasksDao {
 		}
 
 	}
-
-	public void update(int id, String taskname, String taskdetail) {
+  
+	public void update(int id, String taskname, String taskdetail, String kigen) {
 
 		try (PreparedStatement stmt = this.con.prepareStatement(UPDATE_SQL)) {
 			stmt.setString(1, taskname);
 			stmt.setString(2, taskdetail);
 			stmt.setInt(3, id);
-
-			//			stmt.setString(3, data.getKigen());
-			//			stmt.setBoolean(4, data.isNeedmail());
-			//			stmt.setString(5, data.getMailtime());
-			//			stmt.setBoolean(6, data.isRegular());
-			//			stmt.setString(7, data.getTaskinterval());
-
+			stmt.setString(3,kigen);
+			stmt.setInt(4, id);
 			/* ｓｑｌ実行 */
 			stmt.executeUpdate();
 		} catch (SQLException e) {

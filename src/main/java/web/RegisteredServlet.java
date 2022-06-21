@@ -31,10 +31,9 @@ public class RegisteredServlet extends HttpServlet {
 
 		//セッションからデータを取得
 		HttpSession session = request.getSession();
-		UsersVo usersVo = (UsersVo) session.getAttribute("UsersVo");
-
-		TasksVo inputData = receiveInput(request, usersVo.getUserid());
-
+	    UsersVo usersVo  = (UsersVo)session.getAttribute("UsersVo");
+		
+		TasksVo inputData = receiveInput(request,usersVo.getUserid());
 		sendDB(inputData);
 
 		//JSPに遷移する(6/20現在サーブレット遷移してます)

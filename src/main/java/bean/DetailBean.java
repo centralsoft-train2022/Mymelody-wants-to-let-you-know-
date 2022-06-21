@@ -8,12 +8,8 @@ import vo.TasksVo;
 public class DetailBean {
 	
 	private String userName;
-	private List<TasksVo> taskList = new ArrayList<TasksVo>();
+	private TasksVo task;
 	private List<String> PicturePaths = new ArrayList<String>();
-	
-	private int Taskid;
-	
-	
 
 	public String getUserName() {
 		return userName;
@@ -31,22 +27,12 @@ public class DetailBean {
 		PicturePaths.add(picturePath);
 	}
 
-	
-	public int getTaskid() {
-		return this.Taskid;
+	public TasksVo getTask() {
+		return task;
 	}
 
-	public void setTaskid(int Taskid) {
-		this.Taskid = Taskid;
+	public void setTask(TasksVo task) {
+		this.task = task;
 	}
-
-	public List<TasksVo> getTaskList() {
-		return taskList;
-	}
-
-	public void setTaskList(List<TasksVo> taskList) {
-		this.taskList = taskList;
-	}
-	
 	
 }
