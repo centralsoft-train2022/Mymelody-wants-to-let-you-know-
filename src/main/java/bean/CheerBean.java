@@ -6,6 +6,15 @@ import java.util.List;
 public class CheerBean {
 	private List<String> PicturePaths = new ArrayList<String>();
 	private String userName;
+	private String message;
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public String getUserName() {
 		return userName;

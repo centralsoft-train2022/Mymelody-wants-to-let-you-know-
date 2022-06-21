@@ -19,9 +19,9 @@
 	</div>
 	<img src="pictures/<%=bean.getPicturePath(0)%>" title="キャラクター画像"
 		class="image">
-
+		<br>
 	<div style="align: center;" class="balloon1-top">
-		<p>こんにちは。これは例です。</p>
+		<p><%=bean.getMessage()%></p>
 	</div>
 
 	<form method="POST" action="TaskListServlet">

@@ -49,11 +49,24 @@ public class CheerServlet extends HttpServlet {
 		CheerBean bean = new CheerBean();
 
 		List<PicturesVo> pictureList = getPictures();
-
 		Random r = new Random();
-
 		bean.addPicturePath(pictureList.get(r.nextInt(0, pictureList.size() - 1)).getPath());
+		
+		bean.setMessage(randomMessage());
+		
 		return bean;
+	}
+
+	private String randomMessage() {
+		
+		Random r = new Random();
+		int random = r.nextInt(3);
+		
+		if(random == 0) {return "がんばれ！";}
+		if(random == 1) {return "ファイト！";}
+		if(random == 2) {return "やったれ！";}
+		
+		return null;
 	}
 
 	private List<PicturesVo> getPictures() {
