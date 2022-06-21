@@ -19,6 +19,11 @@
 	font-size: 1.7em;
 }
 
+.arart{
+	color: red;
+	font-weight: bold;	
+}
+
 body {
 	width: 80%;
 	margin: 0 auto;
