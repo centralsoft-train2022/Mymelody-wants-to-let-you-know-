@@ -42,6 +42,11 @@ public class RegisteredServlet extends HttpServlet {
 		
 		TasksVo inputData = receiveInput(request, usersVo.getUserid());
 		
+		List<PicturesVo> pictureList = getMinorCharacters();
+		for (PicturesVo pv : pictureList) {
+			rbean.addPicturePath(pv.getPath());
+		}
+		
 		if (inputData.getTaskname().isEmpty() && inputData.getKigen().equals(" ")) {
 
 			rbean.setTaskNameExists(false);
@@ -198,4 +203,20 @@ public class RegisteredServlet extends HttpServlet {
 		return null;
 	}
 
+	private List<PicturesVo> getMinorCharacters() {
+		List<PicturesVo> pictureList = new ArrayList<PicturesVo>();
+
+		DBUtil db = new DBUtil();
+
+		try (Connection c = db.getConnection();) {
+
+			PicturesDao dao = new PicturesDao(c);
+
+			pictureList = dao.getMinorCharacters();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return pictureList;
+	}
 }
