@@ -31,14 +31,22 @@ public class RegisteredServlet extends HttpServlet {
 
 		//セッションからデータを取得
 		HttpSession session = request.getSession();
-	    UsersVo usersVo  = (UsersVo)session.getAttribute("UsersVo");
-		
-		TasksVo inputData = receiveInput(request,usersVo.getUserid());
-		sendDB(inputData);
+		UsersVo usersVo = (UsersVo) session.getAttribute("UsersVo");
 
-		//JSPに遷移する(6/20現在サーブレット遷移してます)
-		RequestDispatcher disp = request.getRequestDispatcher("CheerServlet");
-		disp.forward(request, response);
+		TasksVo inputData = receiveInput(request, usersVo.getUserid());
+
+		System.out.println(inputData.getKigen());
+
+		if (inputData.getTaskname().isEmpty() || inputData.getKigen().equals(" ")) {
+			RequestDispatcher disp = request.getRequestDispatcher("RegisterServlet");
+			disp.forward(request, response);
+		} else {
+			sendDB(inputData);
+
+			//JSPに遷移する(6/20現在サーブレット遷移してます)
+			RequestDispatcher disp = request.getRequestDispatcher("CheerServlet");
+			disp.forward(request, response);
+		}
 	}
 
 	private void sendDB(TasksVo inputData) {
