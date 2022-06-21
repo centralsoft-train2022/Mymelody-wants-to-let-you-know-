@@ -92,16 +92,21 @@
 		</p>
 
 		<p>
-			・メール送信日時変更<br> <input type="datetime-local" name="maildate"
+			・タスク期限<br> <input type="datetime-local" name="tasktime"
 				value=<%=bean.getTask().getKigen().replace(" ", "T")%>>
 		</p>
 
-		<p>
 
-			・アラートメール送信の有無<br> <input type="radio" name="needmail"
-				value="Yes" <%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes
-			<input type="radio" name="needmail" value="No"
-				<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
+
+		<p>
+			・メール送信日時変更<br> 
+			<input type="datetime-local" name="maildate"value=<%=bean.getTask().getMailtime().replace(" ", "T")%>>
+		</p>
+
+		<p>
+			・アラートメール送信の有無<br> 
+			<input type="radio" name="needmail"value="Yes" <%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes
+			<input type="radio" name="needmail" value="No"<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
 		</p>
 
 
@@ -114,11 +119,11 @@
 		</p>
 
 		<p>
-			・繰り返し期間<br> <input type="number" name="month" value="0" min="0"
-				max="12">カ月・ <input type="number" name="day" value="0"
-				min="0" max="30">日・ <input type="number" name="hour"
-				value="0" min="0" max="23">時間・ <input type="number"
-				name="minutes" value="0" min="0" max="59">分
+			・繰り返し期間<br> 
+			<input type="number" name="month" value="<%=bean.getMonth()%>" min="0"max="12">カ月・ 
+			<input type="number" name="day" value="<%=bean.getDay()%>"min="0" max="30">日・ 
+			<input type="number" name="hour"value="<%=bean.getHour()%>" min="0" max="23">時間・ 
+			<input type="number"name="minutes" value="<%=bean.getMinutes()%>" min="0" max="59">分
 		</p>
 
 		<Button type="submit" name="taskid"

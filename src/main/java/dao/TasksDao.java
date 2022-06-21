@@ -105,6 +105,8 @@ public class TasksDao {
 			+ " set taskname = ?"
 			+ " ,taskbody = ?"
 			+ " ,kigen = ?"
+			+ " ,mailtime = ?"
+			+ " ,taskinterval = ?"
 			+ " WHERE\n"
 			+ " taskid = ?;";
 
@@ -224,14 +226,15 @@ public class TasksDao {
 
 	}
 
-	public void update(int id, String taskname, String taskdetail, String kigen) {
+	public void update(int id, String taskname, String taskdetail, String kigen, String maildate, String interval) {
 
 		try (PreparedStatement stmt = this.con.prepareStatement(UPDATE_SQL)) {
 			stmt.setString(1, taskname);
 			stmt.setString(2, taskdetail);
-			stmt.setInt(3, id);
 			stmt.setString(3, kigen);
-			stmt.setInt(4, id);
+			stmt.setString(4, maildate);
+			stmt.setString(5, interval);
+			stmt.setInt(6, id);
 			/* ｓｑｌ実行 */
 			stmt.executeUpdate();
 		} catch (SQLException e) {

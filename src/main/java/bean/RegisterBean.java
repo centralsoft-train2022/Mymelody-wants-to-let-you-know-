@@ -4,11 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterBean {
-	
+
 	private String userName;
+	private boolean isTaskNameExists;
+	private boolean isTaskKigenExists;
 	private List<String> PicturePaths = new ArrayList<String>();
-	
-	
+
+	public boolean isTaskNameExists() {
+		return isTaskNameExists;
+	}
+
+	public void setTaskNameExists(boolean isTaskNameExists) {
+		this.isTaskNameExists = isTaskNameExists;
+	}
+
+	public boolean isTaskKigenExists() {
+		return isTaskKigenExists;
+	}
+
+	public void setTaskKigenExists(boolean isTaskKigenExists) {
+		this.isTaskKigenExists = isTaskKigenExists;
+	}
 
 	public String getUserName() {
 		return userName;
@@ -23,6 +39,7 @@ public class RegisterBean {
 	}
 
 	public void addPicturePath(String picturePath) {
-		PicturePaths.add(picturePath);}
+		PicturePaths.add(picturePath);
+	}
 
 }

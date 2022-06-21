@@ -18,6 +18,35 @@
 		class="image">
 
 	<h1>登録画面</h1>
+	
+			<%
+			if (!bean.isTaskNameExists() && bean.isTaskKigenExists()) {
+			%>
+			<div style="color: red;" class="alart">
+			タスク名を入力してください
+			</div>
+			<%
+			}
+			%>
+			<%
+			if (!bean.isTaskKigenExists() && bean.isTaskNameExists()) {
+			%>
+			<p style="color: red;" class="alart">
+			期限を入力してください
+			</p>
+			<%
+			}
+			%>
+			
+			<%
+			if (!bean.isTaskKigenExists() && !bean.isTaskNameExists()) {
+			%>
+			<p style="color: red;" class="alart">
+			タスク名と期限を入力してください
+			</p>
+			<%
+			}
+			%>
 
 	<form method="POST" action="RegisteredServlet" class="box1">
 		<dl>
