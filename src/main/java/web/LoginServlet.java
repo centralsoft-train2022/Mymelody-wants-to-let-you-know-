@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("usersVo", user);
+		session.setAttribute("UsersVo", user);
 			
 		request.setAttribute("bean", getLoginBean());
 			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");

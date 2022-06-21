@@ -33,7 +33,7 @@ public class TasksDao {
 			+ " from"
 			+ " tasks"
 			+ " Where"
-			+ " taskvisible = 0";
+			+ " taskvisible = 1";
 
 	private static final String Extract_AllTASKS_SQL = "select "
 			+ " taskid"

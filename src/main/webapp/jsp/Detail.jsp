@@ -23,8 +23,13 @@
 			<th>タスク内容</th>
 			<th>期限</th>
 			<th>達成状況</th>
+			<%if(bean.getTask().isNeedmail()){%>
 			<th>メール送信日時</th>
+			<%}%>
+			
+			<%if(bean.getTask().isRegular()){%>
 			<th>繰り返し期間</th>
+			<%}%>
 		</tr>
 
 		<tr>
@@ -33,9 +38,13 @@
 			<td><%=bean.getTask().getTaskbody()%></td>
 			<td><%=bean.getTask().getKigen()%></td>
 			<td><%=bean.getTask().isCompleted()? web.Comon.TRUE :web.Comon.FALSE %></td>
-			<td><%=bean.getTask().getMailtime()%></td>
-			<td><%=bean.getTask().isNeedmail()%></td>
+			<%if(bean.getTask().isNeedmail()){%>
+				<td><%=bean.getTask().getMailtime()%></td>
+			<%}%>
+			
+			<%if(bean.getTask().isRegular()){%>
 			<td><%=bean.getTask().getTaskinterval()%></td>
+			<%}%>
 		</tr>
 	</table>
 	

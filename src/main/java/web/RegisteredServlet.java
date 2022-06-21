@@ -31,7 +31,7 @@ public class RegisteredServlet extends HttpServlet {
 		
 		//セッションからデータを取得
 		HttpSession session = request.getSession();
-	    UsersVo usersVo  = (UsersVo)session.getAttribute("usersVo");
+	    UsersVo usersVo  = (UsersVo)session.getAttribute("UsersVo");
 		
 		TasksVo inputData = receiveInput(request,usersVo.getUserid());
 
