@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<jsp:useBean id="bean" class="bean.LoginBean" scope="request"/>
+<jsp:useBean id="bean" class="bean.LoginBean" scope="request" />
 
 <!DOCTYPE html>
 <html>
@@ -15,21 +15,23 @@
 </head>
 
 <body>
-<br>
+
+	<br>
 	<p>
 		<img src="pictures/kaguya.png" title="タイトル" class="topimage">
 	</p>
-	
+
 	<div class="box1">
 		<form action="LoginServlet" method="post">
 
-			ユーザー名<input name="Mailaddress" type="text"><br>
-			パスワード<input name="Password" type ="text"><br>
-			 <input type="submit" value="ログイン">
+			ユーザー名<input name="Mailaddress" type="text"><br> パスワード<input
+				name="Password" type="text"><br> <input type="submit"
+				value="ログイン">
 		</form>
 	</div>
-	
-	<img src="pictures/<%=bean.getPicturePath(0) %>" title="キャラクター画像" class="image">
+
+	<img src="pictures/<%=bean.getPicturePath(0)%>" title="キャラクター画像"
+		class="image">
 
 </body>
 </html>

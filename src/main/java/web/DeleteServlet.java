@@ -24,9 +24,7 @@ public class DeleteServlet extends HttpServlet {
     	String s = request.getParameter("delete");
     	int num = Integer.parseInt(s);
     	
-		DeleteTask(num);
- 				
-    	
+    	DeleteTask(num);
     	
     	//JSPに遷移する
     	RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");

@@ -94,7 +94,7 @@ public class TasksDao {
 	private static final String DELETE_Task = ""
 			+ "UPDATE \n"
 			+ "	tasks\n"
-			+ " set taskvisible = 1"
+			+ " set taskvisible = 0"
 			+ " WHERE\n"
 			+ " taskid = ?";
 

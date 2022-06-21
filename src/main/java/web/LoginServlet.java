@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		
 		UsersVo user = getUser(mailaddress);
 		
-		if(user.getUserid()==0) {
+		if(user.getUserid()==0||!password.equals(user.getPassword())) {
 			request.setAttribute("bean", getLoginBean());
 			RequestDispatcher disp = request.getRequestDispatcher("jsp/Login.jsp");
 			disp.forward(request, response);
