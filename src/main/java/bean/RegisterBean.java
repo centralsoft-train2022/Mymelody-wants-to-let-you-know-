@@ -5,10 +5,21 @@ import java.util.List;
 
 public class RegisterBean {
 
+	private String message;
 	private String userName;
 	private boolean isTaskNameExists;
 	private boolean isTaskKigenExists;
 	private List<String> PicturePaths = new ArrayList<String>();
+	
+	
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public boolean isTaskNameExists() {
 		return isTaskNameExists;

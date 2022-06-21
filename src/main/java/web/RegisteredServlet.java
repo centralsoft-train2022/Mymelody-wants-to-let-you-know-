@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.CheerBean;
 import bean.RegisterBean;
 import dao.DBUtil;
 import dao.PicturesDao;
@@ -30,54 +31,56 @@ public class RegisteredServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		//セッションからデータを取得
+		RegisterBean rbean = new RegisterBean();
+		CheerBean cbean = new CheerBean();
+		
+		//usernameをBeanに渡す
 		HttpSession session = request.getSession();
 		UsersVo usersVo = (UsersVo) session.getAttribute("UsersVo");
-
+		rbean.setUserName(usersVo.getUsername());
+		cbean.setUserName(usersVo.getUsername());
+		
 		TasksVo inputData = receiveInput(request, usersVo.getUserid());
-
-		RegisterBean bean = new RegisterBean();
-
-		List<PicturesVo> pictureList = getMinorCharacters();
-		for (PicturesVo pv : pictureList) {
-			bean.addPicturePath(pv.getPath());
-		}
-
-		bean.setUserName(usersVo.getUsername());
-
+		
 		if (inputData.getTaskname().isEmpty() && inputData.getKigen().equals(" ")) {
 
-			bean.setTaskNameExists(false);
-			bean.setTaskKigenExists(false);
+			rbean.setTaskNameExists(false);
+			rbean.setTaskKigenExists(false);
 
-			request.setAttribute("bean", bean);
+			request.setAttribute("bean", rbean);
 
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Register.jsp");
 			disp.forward(request, response);
 
 		} else if (inputData.getTaskname().isEmpty()) {
-			bean.setTaskNameExists(false);
-			bean.setTaskKigenExists(true);
+			rbean.setTaskNameExists(false);
+			rbean.setTaskKigenExists(true);
 
-			request.setAttribute("bean", bean);
+			request.setAttribute("bean", rbean);
 
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Register.jsp");
 			disp.forward(request, response);
 
 		} else if (inputData.getKigen().equals(" ")) {
-			bean.setTaskNameExists(true);
-			bean.setTaskKigenExists(false);
+			rbean.setTaskNameExists(true);
+			rbean.setTaskKigenExists(false);
 
-			request.setAttribute("bean", bean);
+			request.setAttribute("bean", rbean);
 
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Register.jsp");
 			disp.forward(request, response);
 
 		} else {
 			sendDB(inputData);
+			
+			PicturesVo pv = getPicture(inputData.getPictures_pictureid());
 
-			//JSPに遷移する(6/20現在サーブレット遷移してます)
-			RequestDispatcher disp = request.getRequestDispatcher("CheerServlet");
+			cbean.addPicturePath(pv.getPath());
+			cbean.setMessage(randomMessage());
+			
+			request.setAttribute("bean", cbean);
+
+			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Cheer.jsp");
 			disp.forward(request, response);
 		}
 	}
@@ -93,23 +96,6 @@ public class RegisteredServlet extends HttpServlet {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	private List<PicturesVo> getMinorCharacters() {
-		List<PicturesVo> pictureList = new ArrayList<PicturesVo>();
-
-		DBUtil db = new DBUtil();
-
-		try (Connection c = db.getConnection();) {
-
-			PicturesDao dao = new PicturesDao(c);
-
-			pictureList = dao.getMinorCharacters();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		return pictureList;
 	}
 
 	private TasksVo receiveInput(HttpServletRequest request, int userId) {
@@ -180,6 +166,36 @@ public class RegisteredServlet extends HttpServlet {
 			throw new RuntimeException(e);
 		}
 		return pictureList;
+	}
+	
+	private PicturesVo getPicture(int pictureid) {
+
+		PicturesVo pic;
+
+		DBUtil db = new DBUtil();
+
+		try (Connection c = db.getConnection();) {
+
+			PicturesDao dao = new PicturesDao(c);
+
+			pic = dao.getPicture(pictureid);
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return pic;
+	}
+	
+	private String randomMessage() {
+		
+		Random r = new Random();
+		int random = r.nextInt(3);
+		
+		if(random == 0) {return "がんばれ！";}
+		if(random == 1) {return "ファイト！";}
+		if(random == 2) {return "やったれ！";}
+		
+		return null;
 	}
 
 }

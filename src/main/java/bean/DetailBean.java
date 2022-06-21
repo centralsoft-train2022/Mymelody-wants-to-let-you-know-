@@ -6,7 +6,7 @@ import java.util.List;
 import vo.TasksVo;
 
 public class DetailBean {
-	
+
 	private String userName;
 	private TasksVo task;
 	private List<String> PicturePaths = new ArrayList<String>();
@@ -14,7 +14,6 @@ public class DetailBean {
 	private String day;
 	private String hour;
 	private String minutes;
-	
 
 	public String getUserName() {
 		return userName;
@@ -36,7 +35,6 @@ public class DetailBean {
 		return task;
 	}
 
-	
 	public String getMonth() {
 		return month;
 	}
@@ -55,12 +53,16 @@ public class DetailBean {
 
 	public void setTask(TasksVo task) {
 		this.task = task;
-		String [] stringList= task.getTaskinterval().split("[- :]");
-		
-		this.month = String.valueOf(Integer.parseInt(stringList[1]));
-		this.day = String.valueOf(Integer.parseInt(stringList[2]));
-		this.hour = String.valueOf(Integer.parseInt(stringList[3]));
-		this.minutes = String.valueOf(Integer.parseInt(stringList[4]));;
+
+		if (!(task.getTaskinterval() == null)) {
+
+			String[] stringList = task.getTaskinterval().split("[- :]");
+
+			this.month = String.valueOf(Integer.parseInt(stringList[1]));
+			this.day = String.valueOf(Integer.parseInt(stringList[2]));
+			this.hour = String.valueOf(Integer.parseInt(stringList[3]));
+			this.minutes = String.valueOf(Integer.parseInt(stringList[4]));
+		}
 	}
 
 }
