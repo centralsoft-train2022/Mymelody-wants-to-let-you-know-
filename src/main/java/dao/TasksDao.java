@@ -33,7 +33,8 @@ public class TasksDao {
 			+ " from"
 			+ " tasks"
 			+ " Where"
-			+ " taskvisible = 1";
+			+ " users_userid = ?"
+			+ " and taskvisible = 1";
 
 	private static final String Extract_AllTASKS_SQL = "select "
 			+ " taskid"
@@ -107,13 +108,13 @@ public class TasksDao {
 			+ " WHERE\n"
 			+ " taskid = ?;";
 
-	public List<TasksVo> getAllTasks() {
+	public List<TasksVo> getAllTasks(int uid) {
 		List<TasksVo> list = new ArrayList<TasksVo>();
 
 		try (PreparedStatement stmt = this.con.prepareStatement(SELECT_AllTASKS_SQL)) {
 
 			// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
-
+			stmt.setInt(1, uid);
 			/* ｓｑｌ実行 */
 			try (ResultSet rset = stmt.executeQuery();) {
 

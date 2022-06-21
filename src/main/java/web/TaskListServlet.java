@@ -29,20 +29,22 @@ public class TaskListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 社員リストwoDBから取得 課題
 		//		EmployeesVo  emp = getEmployeesVo("aaaaa");//テストデータ（１つの場合）
-		List<TasksVo> taskList = getAllTasks();
+
+		//セッションからログインユーザーを取得
+		HttpSession session = request.getSession();
+		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
+
+		int uid = user.getUserid();
+		List<TasksVo> taskList = getAllTasks(uid);
 
 		TaskListBean bean = new TaskListBean();
-		
+
 		bean.setTaskList(taskList);
 
 		List<PicturesVo> pictureList = getMajorCharacters();
 		for (PicturesVo pv : pictureList) {
 			bean.addPicturePath(pv.getPath());
 		}
-
-		//セッションからログインユーザーを取得
-		HttpSession session = request.getSession();
-		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
 
 		bean.setUserName(user.getUsername());
 
@@ -70,7 +72,7 @@ public class TaskListServlet extends HttpServlet {
 		return pictureList;
 	}
 
-	private static List<TasksVo> getAllTasks() {
+	private static List<TasksVo> getAllTasks(int uid) {
 
 		List<TasksVo> tskList = new ArrayList<TasksVo>();
 
@@ -80,7 +82,7 @@ public class TaskListServlet extends HttpServlet {
 
 			TasksDao tdao = new TasksDao(c);
 
-			tskList = tdao.getAllTasks();
+			tskList = tdao.getAllTasks(uid);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
