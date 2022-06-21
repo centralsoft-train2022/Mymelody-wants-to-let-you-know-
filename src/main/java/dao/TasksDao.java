@@ -106,16 +106,7 @@ public class TasksDao {
 			+ " ,kigen = ?"
 			+ " WHERE\n"
 			+ " taskid = ?;";
-	
-
-//	
-//	+ " ,set completed = ?"
-//	
-//	+ " ,set needmail = ?"
-//	+ " ,set mailtime = ?"
-//	+ " ,set regular = ?"
-//	+ " ,set taskinterval = ?"
-	
+  
 	public List<TasksVo> getAllTasks() {
 		List<TasksVo> list = new ArrayList<TasksVo>();
 
@@ -195,19 +186,20 @@ public class TasksDao {
 
 		PreparedStatement stmt = this.con.prepareStatement(UPDATE_TaskAchievement);
 
-				stmt.setInt(1, num);
+		stmt.setInt(1, num);
 		/* ｓｑｌ実行 */
 		stmt.execute();
 	}
-	
+
 	public void DeleteTask(int num) throws SQLException {
 
 		PreparedStatement stmt = this.con.prepareStatement(DELETE_Task);
 
-		stmt.setInt( 1, num );
+		stmt.setInt(1, num);
 		/* ｓｑｌ実行 */
 		stmt.execute();
 	}
+
 	public void insert(TasksVo data) {
 		try (PreparedStatement stmt = this.con.prepareStatement(INSERT_SQL)) {
 
@@ -230,24 +222,15 @@ public class TasksDao {
 		}
 
 	}
+  
 	public void update(int id, String taskname, String taskdetail, String kigen) {
 
 		try (PreparedStatement stmt = this.con.prepareStatement(UPDATE_SQL)) {
 			stmt.setString(1, taskname);
 			stmt.setString(2, taskdetail);
+			stmt.setInt(3, id);
 			stmt.setString(3,kigen);
 			stmt.setInt(4, id);
-			
-			
-			
-			
-
-//			stmt.setString(3, data.getKigen());
-//			stmt.setBoolean(4, data.isNeedmail());
-//			stmt.setString(5, data.getMailtime());
-//			stmt.setBoolean(6, data.isRegular());
-//			stmt.setString(7, data.getTaskinterval());
-			
 			/* ｓｑｌ実行 */
 			stmt.executeUpdate();
 		} catch (SQLException e) {

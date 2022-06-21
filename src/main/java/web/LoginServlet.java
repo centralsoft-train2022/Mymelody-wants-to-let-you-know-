@@ -23,8 +23,8 @@ import vo.PicturesVo;
 import vo.UsersVo;
 
 @WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {	
-  
+public class LoginServlet extends HttpServlet {
+
 	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -47,13 +47,11 @@ public class LoginServlet extends HttpServlet {
 
 	private void display(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-    
+
 		String mailaddress = request.getParameter("Mailaddress");
 		String password = request.getParameter("Password");
 		
 		UsersVo user = getUser(mailaddress);
-		
-		System.out.println(user);
 		
 		if(user.getUserid()==0) {
 			request.setAttribute("bean", getLoginBean());
@@ -76,7 +74,6 @@ public class LoginServlet extends HttpServlet {
 
 			UsersDao dao = new UsersDao(c);
 			return dao.getUser(mailaddress);
-
 		}
 
 		catch (SQLException e) {

@@ -28,16 +28,15 @@ public class RegisteredServlet extends HttpServlet {
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+
 		//セッションからデータを取得
 		HttpSession session = request.getSession();
 	    UsersVo usersVo  = (UsersVo)session.getAttribute("UsersVo");
 		
 		TasksVo inputData = receiveInput(request,usersVo.getUserid());
-
 		sendDB(inputData);
-    
-    		//JSPに遷移する(6/20現在サーブレット遷移してます)
+
+		//JSPに遷移する(6/20現在サーブレット遷移してます)
 		RequestDispatcher disp = request.getRequestDispatcher("CheerServlet");
 		disp.forward(request, response);
 	}
@@ -85,7 +84,7 @@ public class RegisteredServlet extends HttpServlet {
 		if (boolNeedmail == false) {
 			mailtime = null;
 		}
-		
+
 		return new TasksVo(
 				name,
 				detail,
@@ -96,21 +95,21 @@ public class RegisteredServlet extends HttpServlet {
 				interval,
 				userId,
 				getRandomMajorCharacter().getPictureId());
-		
+
 	}
-	
+
 	private PicturesVo getRandomMajorCharacter() {
-		
+
 		List<PicturesVo> pictureList = getMajorCharacters();
 		Random r = new Random();
-		
-		return pictureList.get(r.nextInt(0,pictureList.size()-1));
-		
+
+		return pictureList.get(r.nextInt(0, pictureList.size() - 1));
+
 	}
 
 	private List<PicturesVo> getMajorCharacters() {
 		List<PicturesVo> pictureList = new ArrayList<PicturesVo>();
-		
+
 		DBUtil db = new DBUtil();
 
 		try (Connection c = db.getConnection();) {
@@ -118,7 +117,7 @@ public class RegisteredServlet extends HttpServlet {
 			PicturesDao dao = new PicturesDao(c);
 
 			pictureList = dao.getMajorCharacters();
-			
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
