@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.RegisterBean;
 import dao.DBUtil;
 import dao.PicturesDao;
 import dao.TasksDao;
@@ -31,14 +32,54 @@ public class RegisteredServlet extends HttpServlet {
 
 		//セッションからデータを取得
 		HttpSession session = request.getSession();
-	    UsersVo usersVo  = (UsersVo)session.getAttribute("UsersVo");
-		
-		TasksVo inputData = receiveInput(request,usersVo.getUserid());
-		sendDB(inputData);
+		UsersVo usersVo = (UsersVo) session.getAttribute("UsersVo");
 
-		//JSPに遷移する(6/20現在サーブレット遷移してます)
-		RequestDispatcher disp = request.getRequestDispatcher("CheerServlet");
-		disp.forward(request, response);
+		TasksVo inputData = receiveInput(request, usersVo.getUserid());
+
+		RegisterBean bean = new RegisterBean();
+
+		List<PicturesVo> pictureList = getMinorCharacters();
+		for (PicturesVo pv : pictureList) {
+			bean.addPicturePath(pv.getPath());
+		}
+
+		bean.setUserName(usersVo.getUsername());
+
+		if (inputData.getTaskname().isEmpty() && inputData.getKigen().equals(" ")) {
+
+			bean.setTaskNameExists(false);
+			bean.setTaskKigenExists(false);
+
+			request.setAttribute("bean", bean);
+
+			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Register.jsp");
+			disp.forward(request, response);
+
+		} else if (inputData.getTaskname().isEmpty()) {
+			bean.setTaskNameExists(false);
+			bean.setTaskKigenExists(true);
+
+			request.setAttribute("bean", bean);
+
+			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Register.jsp");
+			disp.forward(request, response);
+
+		} else if (inputData.getKigen().equals(" ")) {
+			bean.setTaskNameExists(true);
+			bean.setTaskKigenExists(false);
+
+			request.setAttribute("bean", bean);
+
+			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Register.jsp");
+			disp.forward(request, response);
+
+		} else {
+			sendDB(inputData);
+
+			//JSPに遷移する(6/20現在サーブレット遷移してます)
+			RequestDispatcher disp = request.getRequestDispatcher("CheerServlet");
+			disp.forward(request, response);
+		}
 	}
 
 	private void sendDB(TasksVo inputData) {
@@ -52,6 +93,23 @@ public class RegisteredServlet extends HttpServlet {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	private List<PicturesVo> getMinorCharacters() {
+		List<PicturesVo> pictureList = new ArrayList<PicturesVo>();
+
+		DBUtil db = new DBUtil();
+
+		try (Connection c = db.getConnection();) {
+
+			PicturesDao dao = new PicturesDao(c);
+
+			pictureList = dao.getMinorCharacters();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return pictureList;
 	}
 
 	private TasksVo receiveInput(HttpServletRequest request, int userId) {
