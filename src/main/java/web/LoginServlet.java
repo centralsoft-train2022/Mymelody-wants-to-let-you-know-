@@ -28,9 +28,14 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setAttribute("bean", getLoginBean());
-		
+
+		LoginBean bean = getLoginBean();
+
+		bean.setWrongUserName(true);
+		bean.setWrongPassword(true);
+
+		request.setAttribute("bean", bean);
+
 		RequestDispatcher disp = request.getRequestDispatcher("jsp/Login.jsp");
 		disp.forward(request, response);
 
@@ -40,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		display(request, response);
 
 	}
@@ -50,22 +55,29 @@ public class LoginServlet extends HttpServlet {
 
 		String mailaddress = request.getParameter("Mailaddress");
 		String password = request.getParameter("Password");
-		
+
 		UsersVo user = getUser(mailaddress);
-		
-		if(user.getUserid()==0||!password.equals(user.getPassword())) {
-			request.setAttribute("bean", getLoginBean());
+
+		LoginBean bean = getLoginBean();
+
+		if (user.getUserid() == 0 || !password.equals(user.getPassword())) {
+
+			bean.setWrongUserName(false);
+			bean.setWrongPassword(false);
+
+			request.setAttribute("bean", bean);
 			RequestDispatcher disp = request.getRequestDispatcher("jsp/Login.jsp");
 			disp.forward(request, response);
-		}
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("UsersVo", user);
-			
-		request.setAttribute("bean", getLoginBean());
+		} else {
+
+			HttpSession session = request.getSession();
+			session.setAttribute("UsersVo", user);
+
+			request.setAttribute("bean", bean);
 			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
-			disp.forward(request, response);}
-		
+			disp.forward(request, response);
+		}
+	}
 
 	private UsersVo getUser(String mailaddress) {
 		DBUtil db = new DBUtil();
@@ -79,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 		catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 	private LoginBean getLoginBean() {

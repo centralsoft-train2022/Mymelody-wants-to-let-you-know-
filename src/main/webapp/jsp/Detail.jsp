@@ -113,9 +113,9 @@
 
 		<p>
 			・繰り返し設定の有無<br> <input type="radio" name="regular" value="Yes"
-				<%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes <input
+				<%=bean.getTask().isRegular() ? "checked" : ""%>>Yes <input
 				type="radio" name="regular" value="No"
-				<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
+				<%=!bean.getTask().isRegular() ? "checked" : ""%>>No
 		</p>
 
 		<p>
