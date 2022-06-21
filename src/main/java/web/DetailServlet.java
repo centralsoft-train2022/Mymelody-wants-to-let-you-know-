@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.DetailBean;
 import dao.DBUtil;
@@ -17,6 +18,7 @@ import dao.PicturesDao;
 import dao.TasksDao;
 import vo.PicturesVo;
 import vo.TasksVo;
+import vo.UsersVo;
 
 @WebServlet("/DetailServlet")
 public class DetailServlet extends HttpServlet {
@@ -35,6 +37,11 @@ public class DetailServlet extends HttpServlet {
 
 		PicturesVo pic = getPicture(task.getPictures_pictureid());
 		bean.addPicturePath(pic.getPath());
+
+		HttpSession session = request.getSession();
+		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
+
+		bean.setUserName(user.getUsername());
 
 		request.setAttribute("bean", bean);
 
