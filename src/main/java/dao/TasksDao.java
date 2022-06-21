@@ -94,7 +94,7 @@ public class TasksDao {
 	private static final String DELETE_Task = ""
 			+ "UPDATE \n"
 			+ "	tasks\n"
-			+ " set taskvisible = 1"
+			+ " set taskvisible = 0"
 			+ " WHERE\n"
 			+ " taskid = ?";
 
@@ -106,7 +106,7 @@ public class TasksDao {
 			+ " ,kigen = ?"
 			+ " WHERE\n"
 			+ " taskid = ?;";
-  
+
 	public List<TasksVo> getAllTasks() {
 		List<TasksVo> list = new ArrayList<TasksVo>();
 
@@ -146,11 +146,11 @@ public class TasksDao {
 	}
 
 	public TasksVo getExtractTasks(int num) {
-		
+
 		TasksVo task = new TasksVo();
 
 		try (PreparedStatement stmt = this.con.prepareStatement(Extract_AllTASKS_SQL)) {
-			
+
 			// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
 			stmt.setInt(1, num);
 			/* ｓｑｌ実行 */
@@ -158,7 +158,7 @@ public class TasksDao {
 
 				/* 取得したデータをEmployeesVoのインスタンスにまとめます */
 				while (rset.next()) {
-					
+
 					// em.setEmployeeid( rset.getInt("EMPLOYEEID") );
 					task.setTaskid(rset.getInt(1));
 					task.setTaskname(rset.getString(2));
@@ -178,7 +178,7 @@ public class TasksDao {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		
+
 		return task;
 	}
 
@@ -222,14 +222,14 @@ public class TasksDao {
 		}
 
 	}
-  
+
 	public void update(int id, String taskname, String taskdetail, String kigen) {
 
 		try (PreparedStatement stmt = this.con.prepareStatement(UPDATE_SQL)) {
 			stmt.setString(1, taskname);
 			stmt.setString(2, taskdetail);
 			stmt.setInt(3, id);
-			stmt.setString(3,kigen);
+			stmt.setString(3, kigen);
 			stmt.setInt(4, id);
 			/* ｓｑｌ実行 */
 			stmt.executeUpdate();
