@@ -13,11 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.CheerBean;
 import dao.DBUtil;
 import dao.PicturesDao;
 import vo.PicturesVo;
+import vo.UsersVo;
 
 @WebServlet("/CheerServlet")
 public class CheerServlet extends HttpServlet {
@@ -30,6 +32,11 @@ public class CheerServlet extends HttpServlet {
 
 		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
+
+		HttpSession session = request.getSession();
+		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
+
+		bean.setUserName(user.getUsername());
 
 		//JSPに遷移する
 		request.setAttribute("bean", bean);
