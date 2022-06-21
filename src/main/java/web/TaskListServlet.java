@@ -40,10 +40,11 @@ public class TaskListServlet extends HttpServlet {
 		TaskListBean bean = new TaskListBean();
 
 		bean.setTaskList(taskList);
-
-		List<PicturesVo> pictureList = getMajorCharacters();
-		for (PicturesVo pv : pictureList) {
-			bean.addPicturePath(pv.getPath());
+		
+		//taskListからキャラクターの画像ファイルを取得しBeanへ
+		for(TasksVo task:taskList) {
+		PicturesVo pic = getPicture(task.getPictures_pictureid());
+		bean.addPicturePath(pic.getPath());
 		}
 
 		bean.setUserName(user.getUsername());
@@ -54,9 +55,10 @@ public class TaskListServlet extends HttpServlet {
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/TaskList.jsp");
 		disp.forward(request, response);
 	}
+	
+	private PicturesVo getPicture(int pictureid) {
 
-	private List<PicturesVo> getMajorCharacters() {
-		List<PicturesVo> pictureList = new ArrayList<PicturesVo>();
+		PicturesVo pic;
 
 		DBUtil db = new DBUtil();
 
@@ -64,12 +66,12 @@ public class TaskListServlet extends HttpServlet {
 
 			PicturesDao dao = new PicturesDao(c);
 
-			pictureList = dao.getMajorCharacters();
+			pic = dao.getPicture(pictureid);
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		return pictureList;
+		return pic;
 	}
 
 	private static List<TasksVo> getAllTasks(int uid) {
