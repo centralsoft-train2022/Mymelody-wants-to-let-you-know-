@@ -26,7 +26,6 @@
 			ユーザー名<input name="Mailaddress" type="text"><br>
 			パスワード<input name="Password" type ="text"><br>
 			 <input type="submit" value="ログイン">
-			 <input type = "hidden" name = "fromjsp" value = "loginjsp">
 		</form>
 	</div>
 	

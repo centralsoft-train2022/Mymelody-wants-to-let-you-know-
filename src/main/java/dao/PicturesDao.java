@@ -53,6 +53,50 @@ public class PicturesDao {
 
 	}
 	
+	private static final String SELECT_PICTURE_SQL = ""
+			+ " select *"
+			+ " from"
+			+ " pictures"
+			+ " where"
+			+ " pictureid=? ";
+
+	public PicturesVo getPicture(int picureid) {
+		PicturesVo pic = null;
+
+		try (PreparedStatement stmt = this.con.prepareStatement(SELECT_PICTURE_SQL)) {
+			stmt.setInt(1, picureid);
+			// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
+
+			/* ｓｑｌ実行 */
+			try (ResultSet rset = stmt.executeQuery();) {
+				pic = new PicturesVo();
+
+				/* 取得したデータをEmployeesVoのインスタンスにまとめます */
+				while (rset.next()) {
+					// em.setEmployeeid( rset.getInt("EMPLOYEEID") );
+					pic.setPictureId(rset.getInt(1));
+					pic.setCharacterName(rset.getString(2));
+					pic.setFileName(rset.getString(3));
+					pic.setCharactertype(rset.getInt(4));
+					
+					if(pic.getCharactertype() == 0) {
+						pic.setPath("mymelody/"+pic.getFileName());
+					};
+					if(pic.getCharactertype() == 1) {
+						pic.setPath("majorCharacter/"+pic.getFileName());
+					};
+					if(pic.getCharactertype() == 2) {
+						pic.setPath("minorCharacter/"+pic.getFileName());
+					};
+				}
+
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return pic;
+	}
+	
 	public List<PicturesVo> getMymelodies() {
 		List<PicturesVo> list = new ArrayList<PicturesVo>();
 		list = getAllPictures();

@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<img src="pictures/<%=bean.getPicturePath(1) %>" title="キャラクター画像"
+	<img src="pictures/<%=bean.getPicturePath(0) %>" title="キャラクター画像"
 		class="image">
 	<h1>詳細確認</h1>
 
@@ -20,70 +20,71 @@
 		<tr>
 			<th>タスク名</th>
 			<th>タスク内容</th>
-			<th>タスク期限</th>
-			<th>タスク達成状況</th>
-			<th>アラートメール送信の有無</th>
+			<th>期限</th>
+			<th>達成状況</th>
+      
+			<%if(bean.getTask().isNeedmail()){%>
 			<th>メール送信日時</th>
-			<th>繰り返し機関の有無</th>
+			<%}%>
+			
+			<%if(bean.getTask().isRegular()){%>
 			<th>繰り返し期間</th>
+			<%}%>
+      
 		</tr>
 
-		<%
-		for(vo.TasksVo tv:bean.getTaskList())
-		{
-		String Needmail = String.valueOf(tv.isNeedmail());
-		String isRegular = String.valueOf(tv.isRegular());
-		%>
 		<tr>
-			<td><%=tv.getTaskname()%></td>
-			<td><%=tv.getTaskbody()%></td>
-			<td><%=tv.getKigen()%></td>
-			<td><%=tv.isCompleted()? web.Comon.TRUE :web.Comon.FALSE %></td>
-			<td><%=tv.isNeedmail()%></td>
-			<td><%=tv.getMailtime()%></td>
-			<td><%=tv.isRegular()%></td>
-			<td><%=tv.getTaskinterval()%></td>
+
+			<td><%=bean.getTask().getTaskname()%></td>
+			<td><%=bean.getTask().getTaskbody()%></td>
+			<td><%=bean.getTask().getKigen()%></td>
+			<td><%=bean.getTask().isCompleted()? web.Comon.TRUE :web.Comon.FALSE %></td>
+			<%if(bean.getTask().isNeedmail()){%>
+				<td><%=bean.getTask().getMailtime()%></td>
+			<%}%>
+			
+			<%if(bean.getTask().isRegular()){%>
+			<td><%=bean.getTask().getTaskinterval()%></td>
+			<%}%>
 		</tr>
 	</table>
 	
 	<form method="POST" action="CelebrationServlet">
-		<button type='submit' name='id' value="<%=bean.getTaskid() %>">達成</button>
+		<button type='submit' name='id' value="<%=bean.getTask().getTaskid() %>">達成</button>
 		<br>
 	</form>
 	<form method="POST" action="DeleteServlet">
-		<button type='submit' name='delete' value="<%=bean.getTaskid() %>">削除</button>
+		<button type='submit' name='delete' value="<%=bean.getTask().getTaskid() %>">削除</button>
 		<br>
 	</form>
 	<h1>設定変更</h1>
 	<form method="POST" action="DetailDataServlet">
 	
 		<p>
-			・タスク名変更<br> 
-			<input type="text" name="taskname" value=<%=tv.getTaskname()%>>
+			・タスク名変更<br> <input type="text" name="taskname" value=<%=bean.getTask().getTaskname()%>>
 		</p>
 
 		<p>
-			・タスク内容変更<br> 
-			<input type="text" name="taskdetail" value=<%=tv.getTaskbody()%>>
+			・タスク内容変更<br> <input type="text" name="taskdetail" value=<%=bean.getTask().getTaskbody()%>>
 		</p>
 
 		<p>
-			・タスク期限変更<br>
-			<input type="datetime-local" name="tasktime" value=<%=tv.getKigen().replace(" ","T")%>>
+			・メール送信日時変更<br> <input type="datetime-local" name="maildate" value=<%=bean.getTask().getKigen().replace(" ","T")%>>
 		</p>
 
 		<p>
+
 			・アラートメール送信の有無<br> 
-			<input type="radio" name="needmail" value="Yes" <%=Needmail.equals("true")? "checked" : ""  %>>Yes
-			<input type="radio" name="needmail" value="No" <%=Needmail.equals("false")? "checked" :"" %>>No
+			<input type="radio" name="needmail" value="Yes" <%=bean.getTask().isNeedmail()? "checked" : ""  %>>Yes
+			<input type="radio" name="needmail" value="No" <%=!bean.getTask().isNeedmail()? "checked" :"" %>>No
 		</p>
 				
 
 
 		<p>
 			・繰り返し設定の有無<br>
-			<input type="radio" name="regular" value="Yes" <%=isRegular.equals("true")? "checked" : ""  %>>Yes
-			<input type="radio" name="regular" value="No" <%=isRegular.equals("false")? "checked" :"" %>>No
+			<input type="radio" name="regular" value="Yes" <%=bean.getTask().isNeedmail()? "checked" : ""  %>>Yes
+			<input type="radio" name="regular" value="No" <%=!bean.getTask().isNeedmail()? "checked" :"" %>>No
 		</p>
 
 		<p>
@@ -94,10 +95,8 @@
 			<input type="number" name="minutes" value="0" min="0" max="59">分
 		</p>
 
-		<Button type="submit" name="taskid" value=<%=bean.getTaskid() %>>設定を適用</Button>
+		<Button type="submit" name="taskid" value=<%=bean.getTask().getTaskid() %>>設定を適用</Button>
 	</form>
-
-	<% }%>
 
 
 

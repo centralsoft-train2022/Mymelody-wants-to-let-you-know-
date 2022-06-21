@@ -13,12 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.CelebrationBean;
 import dao.DBUtil;
 import dao.PicturesDao;
 import dao.TasksDao;
 import vo.PicturesVo;
+import vo.UsersVo;
 
 @WebServlet("/CelebrationServlet")
 public class CelebrationServlet extends HttpServlet {
@@ -26,12 +28,35 @@ public class CelebrationServlet extends HttpServlet {
 	protected void doPost(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		CelebrationBean bean = getCelebrationBean();
 
 		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
-		
+
+		//押されたボタンのidを取得、Stringからintへの変換
+		String s = request.getParameter("id");
+		int num = Integer.parseInt(s);
+		Taskachievement(num);
+
+		HttpSession session = request.getSession();
+		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
+
+		bean.setUserName(user.getUsername());
+
+		//JSPに遷移する
+		request.setAttribute("bean", bean);
+		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Celebration.jsp");
+		disp.forward(request, response);
+
+	}
+
+	private void display(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		CelebrationBean bean = getCelebrationBean();
+
+		request.setCharacterEncoding("UTF-8");
 		//押されたボタンのidを取得、Stringからintへの変換
 		String s = request.getParameter("id");
 		int num = Integer.parseInt(s);
@@ -41,7 +66,6 @@ public class CelebrationServlet extends HttpServlet {
 		request.setAttribute("bean", bean);
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Celebration.jsp");
 		disp.forward(request, response);
-		
 	}
 
 	private static void Taskachievement(int id) {
@@ -57,7 +81,6 @@ public class CelebrationServlet extends HttpServlet {
 			throw new RuntimeException(e);
 		}
 	}
-
 
 	private CelebrationBean getCelebrationBean() {
 		CelebrationBean bean = new CelebrationBean();

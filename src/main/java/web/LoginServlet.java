@@ -18,48 +18,71 @@ import javax.servlet.http.HttpSession;
 import bean.LoginBean;
 import dao.DBUtil;
 import dao.PicturesDao;
+import dao.UsersDao;
 import vo.PicturesVo;
+import vo.UsersVo;
 
 @WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
-	
-	
-	
+public class LoginServlet extends HttpServlet {	
+  
 	protected void doGet(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setAttribute("bean", getLoginBean());
+		
+		RequestDispatcher disp = request.getRequestDispatcher("jsp/Login.jsp");
+		disp.forward(request, response);
+
 		display(request, response);
 	}
 
 	protected void doPost(
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		display(request, response);
 
 	}
 
 	private void display(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+    
+		String mailaddress = request.getParameter("Mailaddress");
+		String password = request.getParameter("Password");
 		
-		String username = request.getParameter("Mailaddress");
-		String mailaddress = request.getParameter("Password");
-
-		HttpSession session = request.getSession();
-		session.setAttribute( "username", username);
+		UsersVo user = getUser(mailaddress);
 		
+		System.out.println(user);
 		
-		String fromjsp = request.getParameter("fromjsp");
-
-		if (fromjsp == null) {
-			LoginBean bean = getLoginBean();
-
-			request.setAttribute("bean", bean);
+		if(user.getUserid()==0) {
+			request.setAttribute("bean", getLoginBean());
 			RequestDispatcher disp = request.getRequestDispatcher("jsp/Login.jsp");
 			disp.forward(request, response);
-		} else {
-			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
-			disp.forward(request, response);
 		}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("UsersVo", user);
+			
+		request.setAttribute("bean", getLoginBean());
+			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
+			disp.forward(request, response);}
+		
+
+	private UsersVo getUser(String mailaddress) {
+		DBUtil db = new DBUtil();
+
+		try (Connection c = db.getConnection()) {
+
+			UsersDao dao = new UsersDao(c);
+			return dao.getUser(mailaddress);
+
+		}
+
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
 	}
 
 	private LoginBean getLoginBean() {
