@@ -29,7 +29,7 @@ public class CelebrationServlet extends HttpServlet {
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		CelebrationBean bean = getCelebrationBean();
+		CelebrationBean bean = getCelebrationBean(request);
 
 		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
@@ -39,33 +39,11 @@ public class CelebrationServlet extends HttpServlet {
 		int num = Integer.parseInt(s);
 		Taskachievement(num);
 
-		HttpSession session = request.getSession();
-		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
-
-		bean.setUserName(user.getUsername());
-
 		//JSPに遷移する
 		request.setAttribute("bean", bean);
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Celebration.jsp");
 		disp.forward(request, response);
 
-	}
-
-	private void display(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		CelebrationBean bean = getCelebrationBean();
-
-		request.setCharacterEncoding("UTF-8");
-		//押されたボタンのidを取得、Stringからintへの変換
-		String s = request.getParameter("id");
-		int num = Integer.parseInt(s);
-		Taskachievement(num);
-
-		//JSPに遷移する
-		request.setAttribute("bean", bean);
-		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Celebration.jsp");
-		disp.forward(request, response);
 	}
 
 	private static void Taskachievement(int id) {
@@ -82,8 +60,13 @@ public class CelebrationServlet extends HttpServlet {
 		}
 	}
 
-	private CelebrationBean getCelebrationBean() {
+	private CelebrationBean getCelebrationBean(HttpServletRequest request) {
 		CelebrationBean bean = new CelebrationBean();
+		
+		//usernameをBeanに渡す
+		HttpSession session = request.getSession();
+		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
+		bean.setUserName(user.getUsername());
 
 		List<PicturesVo> pictureList = getPictures();
 
