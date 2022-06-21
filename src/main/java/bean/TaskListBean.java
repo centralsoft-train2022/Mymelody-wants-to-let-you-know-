@@ -11,8 +11,6 @@ public class TaskListBean
 	private String userName;
 	private List<TasksVo> taskList = new ArrayList<TasksVo>();
 	private List<String> PicturePaths = new ArrayList<String>();
-
-	
 	
 	public String getUserName() {
 		return userName;
