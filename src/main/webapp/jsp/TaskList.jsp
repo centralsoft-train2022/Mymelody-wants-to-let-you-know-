@@ -21,7 +21,7 @@
 	<table>
 		<tr style="height: 10px;">
 			<%
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < bean.getTaskList().size(); i++) {
 			%>
 			<th><%=bean.getTaskList().get(i).getTaskname()%></th>
 			<%
@@ -29,7 +29,7 @@
 			%>
 		</tr>
 			<%
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < bean.getPicturePaths().size(); i++) {
 			%>
 		
 		<td><img src="pictures/<%=bean.getPicturePaths().get(i)%>"

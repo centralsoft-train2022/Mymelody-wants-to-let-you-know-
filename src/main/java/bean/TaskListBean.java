@@ -28,9 +28,7 @@ public class TaskListBean {
 	}
 
 	public void addPicturePath(String picturePath) {
-		if (PicturePaths.size() < 5) {
 			PicturePaths.add(picturePath);
-		}
 	}
 
 	public List<TasksVo> getTaskList() {

@@ -66,7 +66,7 @@ public class CheerServlet extends HttpServlet {
 
 			PicturesDao dao = new PicturesDao(c);
 
-			pictureList = dao.getMymelodies();
+			pictureList = dao.getMajorCharacters();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
