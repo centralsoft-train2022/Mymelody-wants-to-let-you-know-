@@ -42,8 +42,6 @@ public class DetailServlet extends HttpServlet {
 		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
 		bean.setUserName(user.getUsername());
 
-		HttpSession session = request.getSession();
-		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
 
 		bean.setUserName(user.getUsername());
 
@@ -85,5 +83,8 @@ public class DetailServlet extends HttpServlet {
 		}
 		return task;
 	}
+	
+
+	
 
 }
