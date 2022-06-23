@@ -72,7 +72,7 @@ public class CelebrationServlet extends HttpServlet {
 
 		Random r = new Random();
 
-		bean.addPicturePath(pictureList.get(r.nextInt(0, pictureList.size() - 1)).getPath());
+		bean.addPicturePath(pictureList.get(r.nextInt(0, pictureList.size())).getPath());
 		return bean;
 	}
 
@@ -86,7 +86,7 @@ public class CelebrationServlet extends HttpServlet {
 
 			PicturesDao dao = new PicturesDao(c);
 
-			pictureList = dao.getMymelodies();
+			pictureList = dao.getComposite();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
