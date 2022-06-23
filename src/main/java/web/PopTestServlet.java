@@ -76,8 +76,8 @@ public class PopTestServlet extends HttpServlet {
 			Date date = new Date();
 
 			if (kigen.before(date)) {//現在日時が期限の日付を超えてるか
-				if (tsk.isCompleted()) {//達成しているか
-					acievementFlag = false;
+				if (!tsk.isCompleted()) {//達成しているか
+					acievementFlag = true;
 					System.out.println("aad");
 				}
 			}

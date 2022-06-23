@@ -15,19 +15,20 @@
 	<img src="pictures/シナモロール1.png" title="シナモロール" class="image">
 
 	<h1>ポップアップ表示前画面</h1>
-	<script>
+	
 	<%
 	if (bean.getAchievementFlag()) {
 			%>
+			<script>
+			let option = 'width=300,height=300,left=200,top=200'
+			let newwin = window.open("jsp/PopTest2.jsp","popUp", option);
 			
-			let option = "width=300,height=300,left=200,top=200"
-			let newwin = open("https://www.google.co.jp/","mywindow", option);
-			
+			</script>
 			
 			<%
 			}
 			%>
-			</script>
+			
 
 
 </body>
