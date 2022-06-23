@@ -45,7 +45,8 @@
 		</tr>
 
 		<tr>
-
+			<%String isRegular = String.valueOf(bean.getTask().isRegular()); %>
+			<%String Mailtime = String.valueOf(bean.getTask().getMailtime());%>
 			<td><%=bean.getTask().getTaskname()%></td>
 			<td><%=bean.getTask().getTaskbody()%></td>
 			<td><%=bean.getTask().getKigen()%></td>
@@ -96,26 +97,21 @@
 				value=<%=bean.getTask().getKigen().replace(" ", "T")%>>
 		</p>
 
-
-
-		<p>
-			・メール送信日時変更<br> 
-			<input type="datetime-local" name="maildate"value=<%=bean.getTask().getMailtime().replace(" ", "T")%>>
-		</p>
-
 		<p>
 			・アラートメール送信の有無<br> 
 			<input type="radio" name="needmail"value="Yes" <%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes
 			<input type="radio" name="needmail" value="No"<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
 		</p>
 
-
+		<p>
+			・メール送信日時変更<br> 
+			<input type="datetime-local" name="maildate"value=<%=Mailtime != null? Mailtime.replace(" ", "T"):""%>>
+		</p>
 
 		<p>
-			・繰り返し設定の有無<br> <input type="radio" name="regular" value="Yes"
-				<%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes <input
-				type="radio" name="regular" value="No"
-				<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
+			・繰り返し設定の有無<br> 
+			<input type="radio" name="regular" value="Yes"<%= isRegular.equals("true")? "checked" : ""%>>Yes 
+			<input type="radio" name="regular" value="No" <%= isRegular.equals("false") ? "checked" : ""%>>No
 		</p>
 
 		<p>

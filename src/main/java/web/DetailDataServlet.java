@@ -44,9 +44,27 @@ public class DetailDataServlet extends HttpServlet {
 			String minutes = request.getParameter("minutes");
 			String interval = "0000-" + month + "-" + day + " " + hour + ":" + minutes;
 			
+			String stringNeedmail = request.getParameter("needmail");
 			
-			tsksdao.update(taskid, taskname, taskdetail, kigen, maildate,interval);//後でbeanにまとめてupdate関数に渡す
-
+			int needmail;
+			if(stringNeedmail.equals("Yes")) {
+				needmail = 1;
+			}else {
+				needmail = 0;
+				maildate = null;
+			}
+			
+			String stringRegular = request.getParameter("regular");
+			int regular;
+			if(stringRegular.equals("Yes")) {
+				regular = 1;
+			}else {
+				regular = 0;
+				interval = null;
+			}
+			
+			tsksdao.update(taskid, taskname, taskdetail, kigen, maildate,interval, needmail, regular);//後でbeanにまとめてupdate関数に渡す
+				
 			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
 			disp.forward(request, response);
 
