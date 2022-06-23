@@ -152,3 +152,50 @@ h2 {
 	margin: 0;
 	padding: 0;
 }
+
+
+
+.button {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: .65em 4em;
+  border: 2px solid #333;
+  color: #333;
+  text-decoration: none;
+  text-align: center;
+  transition: .3s ease-in-out;
+}
+.button span {
+  position: relative;
+  z-index: 2;
+}
+.button::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  content: '';
+  width: 100%;
+  height: 100%;
+  border: 2px solid #333;
+}
+.button::after {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  content: '';
+  width: 101%;
+  height: 105%;
+  background-color: #fe5f95;
+  transition: .3s ease-in-out;
+}
+.button:hover {
+  color: #fff;
+}
+.button:hover::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
