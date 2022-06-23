@@ -123,5 +123,14 @@ public class PicturesDao {
 			pv.setPath("minorCharacter/"+pv.getFileName());}
 		return list;
 	}
+	
+	public List<PicturesVo> getComposite() {
+		List<PicturesVo> list = new ArrayList<PicturesVo>();
+		list = getAllPictures();
+		list.removeIf(picture -> picture.getCharactertype() != 3);
+		for(PicturesVo pv:list) {
+			pv.setPath("composite/"+pv.getFileName());}
+		return list;
+	}
 
 }
