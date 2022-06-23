@@ -19,8 +19,13 @@
 	</div>
 	<img src="pictures/<%=bean.getPicturePath(0)%>" title="キャラクター画像"
 		class="image">
+		<br>
+	<div style="align: center;" class="balloon1-top">
+		<p><%=bean.getMessage()%></p>
+	</div>
+
 	<form method="POST" action="TaskListServlet">
-		がんばれ！！<input type="submit" value="一覧表示画面に戻るよ！">
+		<input type="submit" value="一覧表示画面" >
 	</form>
 </body>
 </html>

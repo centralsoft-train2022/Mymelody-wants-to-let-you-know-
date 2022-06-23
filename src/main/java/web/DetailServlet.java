@@ -42,6 +42,7 @@ public class DetailServlet extends HttpServlet {
 		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
 		bean.setUserName(user.getUsername());
 
+
 		request.setAttribute("bean", bean);
 
 		// JSPに遷移する
@@ -80,5 +81,4 @@ public class DetailServlet extends HttpServlet {
 		}
 		return task;
 	}
-
 }

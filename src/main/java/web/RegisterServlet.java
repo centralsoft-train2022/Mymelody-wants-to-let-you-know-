@@ -36,6 +36,8 @@ public class RegisterServlet extends HttpServlet {
 		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
 
 		bean.setUserName(user.getUsername());
+		bean.setTaskKigenExists(true);
+		bean.setTaskNameExists(true);
 
 		request.setAttribute("bean", bean);
 

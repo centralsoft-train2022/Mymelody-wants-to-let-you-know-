@@ -18,6 +18,35 @@
 		class="image">
 
 	<h1>登録画面</h1>
+	
+			<%
+			if (!bean.isTaskNameExists() && bean.isTaskKigenExists()) {
+			%>
+			<div style="color: red;" class="alart">
+			タスク名を入力してください
+			</div>
+			<%
+			}
+			%>
+			<%
+			if (!bean.isTaskKigenExists() && bean.isTaskNameExists()) {
+			%>
+			<p style="color: red;" class="alart">
+			期限を入力してください
+			</p>
+			<%
+			}
+			%>
+			
+			<%
+			if (!bean.isTaskKigenExists() && !bean.isTaskNameExists()) {
+			%>
+			<p style="color: red;" class="alart">
+			タスク名と期限を入力してください
+			</p>
+			<%
+			}
+			%>
 
 	<form method="POST" action="RegisteredServlet" class="box1">
 		<dl>
@@ -36,8 +65,8 @@
 			</dd>
 			<dt>アラートメール送信</dt>
 			<dd>
-				<input name="mailbutton" type="radio" value="true">はい <input
-					name="mailbutton" type="radio" value="false">いいえ
+				<input name="mailbutton" type="radio" value="true">はい 
+				<input name="mailbutton" type="radio" value="false">いいえ
 			</dd>
 			<dt>メールの送信日時</dt>
 			<dd>
@@ -46,8 +75,8 @@
 			</dd>
 			<dt>繰り返し設定</dt>
 			<dd>
-				<input name="regular" type="radio" value="true">はい <input
-					name="regular" type="radio" value="false">いいえ
+				<input name="regular" type="radio" value="true">はい 
+				<input name="regular" type="radio" value="false">いいえ
 			</dd>
 			<dt>繰り返し間隔</dt>
 			<dd>

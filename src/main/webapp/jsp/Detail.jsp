@@ -45,7 +45,8 @@
 		</tr>
 
 		<tr>
-
+			<%String isRegular = String.valueOf(bean.getTask().isRegular()); %>
+			<%String Mailtime = String.valueOf(bean.getTask().getMailtime());%>
 			<td><%=bean.getTask().getTaskname()%></td>
 			<td><%=bean.getTask().getTaskbody()%></td>
 			<td><%=bean.getTask().getKigen()%></td>
@@ -92,33 +93,33 @@
 		</p>
 
 		<p>
-			・メール送信日時変更<br> <input type="datetime-local" name="maildate"
+			・タスク期限<br> <input type="datetime-local" name="tasktime"
 				value=<%=bean.getTask().getKigen().replace(" ", "T")%>>
 		</p>
 
 		<p>
-
-			・アラートメール送信の有無<br> <input type="radio" name="needmail"
-				value="Yes" <%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes
-			<input type="radio" name="needmail" value="No"
-				<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
-		</p>
-
-
-
-		<p>
-			・繰り返し設定の有無<br> <input type="radio" name="regular" value="Yes"
-				<%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes <input
-				type="radio" name="regular" value="No"
-				<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
+			・アラートメール送信の有無<br> 
+			<input type="radio" name="needmail"value="Yes" <%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes
+			<input type="radio" name="needmail" value="No"<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
 		</p>
 
 		<p>
-			・繰り返し期間<br> <input type="number" name="month" value="0" min="0"
-				max="12">カ月・ <input type="number" name="day" value="0"
-				min="0" max="30">日・ <input type="number" name="hour"
-				value="0" min="0" max="23">時間・ <input type="number"
-				name="minutes" value="0" min="0" max="59">分
+			・メール送信日時変更<br> 
+			<input type="datetime-local" name="maildate"value=<%=Mailtime != null? Mailtime.replace(" ", "T"):""%>>
+		</p>
+
+		<p>
+			・繰り返し設定の有無<br> 
+			<input type="radio" name="regular" value="Yes"<%= isRegular.equals("true")? "checked" : ""%>>Yes 
+			<input type="radio" name="regular" value="No" <%= isRegular.equals("false") ? "checked" : ""%>>No
+		</p>
+
+		<p>
+			・繰り返し期間<br> 
+			<input type="number" name="month" value="<%=bean.getMonth()%>" min="0"max="12">カ月・ 
+			<input type="number" name="day" value="<%=bean.getDay()%>"min="0" max="30">日・ 
+			<input type="number" name="hour"value="<%=bean.getHour()%>" min="0" max="23">時間・ 
+			<input type="number"name="minutes" value="<%=bean.getMinutes()%>" min="0" max="59">分
 		</p>
 
 		<Button type="submit" name="taskid"

@@ -21,6 +21,16 @@
 		<img src="pictures/kaguya.png" title="タイトル" class="topimage">
 	</p>
 
+			<%
+			if (!bean.isWrongUserName() || !bean.isWrongPassword()) {
+			%>
+			<div style="color: red;" class="alart">
+			メールアドレスまたはパスワードが違います
+			</div>
+			<%
+			}
+			%>
+			
 	<div class="box1">
 		<form action="LoginServlet" method="post">
 
