@@ -174,16 +174,16 @@ public class TasksVo implements Serializable {
 		buffer.append(kigen);
 		buffer.append("\n needmail: ");
 		buffer.append(needmail);
-
-		if (mailtime != null) {
-			buffer.append("\n mailtime: ");
-			buffer.append(mailtime);
-		}
-
+		buffer.append("\n mailtime: ");
+		buffer.append(mailtime);
 		buffer.append("\n regular: ");
 		buffer.append(regular);
 
 		if (taskinterval != null) {
+			buffer.append("\n taskinterval: ");
+			buffer.append(taskinterval);
+		}else {
+			taskinterval = "false";
 			buffer.append("\n taskinterval: ");
 			buffer.append(taskinterval);
 		}
