@@ -28,7 +28,7 @@ public class PopTestServlet extends HttpServlet {
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		PopTestBean bean = getPopTestBean(1);
+		PopTestBean bean = setPopTestBean(1);
 
 		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
@@ -45,7 +45,7 @@ public class PopTestServlet extends HttpServlet {
 
 	}
 
-	private PopTestBean getPopTestBean(int uid) {
+	private PopTestBean setPopTestBean(int uid) {
 		PopTestBean bean = new PopTestBean();
 		boolean acievementFlag = checkAchievementFlag(uid);
 

@@ -18,6 +18,22 @@
 		ユーザー名:<%=bean.getUserName()%>
 	</div>
 
+
+	<%
+	if (bean.getAchievementFlag()) {
+			%>
+			<script>
+			let option = 'width=300,height=300,left=200,top=200'
+			let newwin = window.open("jsp/PopTest2.jsp","popUp", option);
+			
+			</script>
+			
+			<%
+			}
+			%>
+			
+
+
 	<table>
 		<tr style="height: 10px;">
 			<%

@@ -10,6 +10,7 @@ public class TaskListBean {
 	private String userName;
 	private List<TasksVo> taskList = new ArrayList<TasksVo>();
 	private List<String> PicturePaths = new ArrayList<String>();
+	private Boolean achievementFlag;
 
 	public String getUserName() {
 		return userName;
@@ -28,7 +29,7 @@ public class TaskListBean {
 	}
 
 	public void addPicturePath(String picturePath) {
-			PicturePaths.add(picturePath);
+		PicturePaths.add(picturePath);
 	}
 
 	public List<TasksVo> getTaskList() {
@@ -37,6 +38,14 @@ public class TaskListBean {
 
 	public void setTaskList(List<TasksVo> taskList) {
 		this.taskList = taskList;
+	}
+
+	public Boolean getAchievementFlag() {
+		return achievementFlag;
+	}
+
+	public void setAchievementFlag(Boolean achievementFlag) {
+		this.achievementFlag = achievementFlag;
 	}
 
 }
