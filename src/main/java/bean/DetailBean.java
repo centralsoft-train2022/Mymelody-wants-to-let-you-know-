@@ -55,7 +55,6 @@ public class DetailBean {
 
 	public void setTask(TasksVo task) {
 		this.task = task;
-		this.minutes = String.valueOf(Integer.parseInt(stringList[4]));
 		if (task.getTaskinterval() != null) {
 			String [] stringList= task.getTaskinterval().split("[- :]");
 			
