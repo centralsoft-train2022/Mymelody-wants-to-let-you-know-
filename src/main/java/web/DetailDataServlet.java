@@ -31,22 +31,48 @@ public class DetailDataServlet extends HttpServlet {
 
 		DetailBean bean = new DetailBean();
 
+		//セッションからユーザーを取得
 		HttpSession session = request.getSession();
 		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
 		bean.setUserName(user.getUsername());
 
+		//入力を受け取る
 		EditInput input = receiveInput(request);
 
-		TasksVo task = convertNewTask(input, user.getUserid());
+		if (!correct(input)) {
 
-		sendDB(task);
+			bean.setTask(getTask(Integer.parseInt(input.getTaskid())));
 
-		RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
-		disp.forward(request, response);
+			bean.addPicturePath(
+					getPicture(getTask(Integer.parseInt(input.getTaskid())).getPictures_pictureid()).getPath());
 
-		//		PicturesVo pic = getPicture(task.getPictures_pictureid());
-		//		bean.addPicturePath(pic.getPath());
+			request.setAttribute("bean", bean);
 
+			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Detail.jsp");
+			disp.forward(request, response);
+		} else {
+
+			TasksVo task = convertNewTask(input, user.getUserid());
+
+			sendDB(task);
+
+			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
+			disp.forward(request, response);
+
+			PicturesVo pic = getPicture(task.getPictures_pictureid());
+			bean.addPicturePath(pic.getPath());
+
+		}
+	}
+
+	private boolean correct(EditInput input) {
+		if (input.getTaskname().isBlank()) {
+			return false;
+		}
+		if (input.getTasktime().isBlank()) {
+			return false;
+		}
+		return true;
 	}
 
 	private void sendDB(TasksVo inputData) {
@@ -127,14 +153,14 @@ public class DetailDataServlet extends HttpServlet {
 		return pic;
 	}
 
-	private static TasksVo getTasksVo(int num) {
+	private static TasksVo getTask(int num) {
 
 		DBUtil db = new DBUtil();
 		TasksVo task;
 
 		try (Connection c = db.getConnection();) {
 			TasksDao tdao = new TasksDao(c);
-			task = tdao.getExtractTasks(num);
+			task = tdao.getTask(num);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

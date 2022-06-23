@@ -116,10 +116,10 @@
 
 		<p>
 			・繰り返し期間<br> 
-			<input type="number" name="month" value="<%=bean.getMonth()%>" min="0"max="12">カ月・ 
-			<input type="number" name="day" value="<%=bean.getDay()%>"min="0" max="30">日・ 
-			<input type="number" name="hour"value="<%=bean.getHour()%>" min="0" max="23">時間・ 
-			<input type="number"name="minutes" value="<%=bean.getMinutes()%>" min="0" max="59">分
+			<input type="number" name="month" value="<%=bean.getTask().getMonth()%>" min="0"max="12">カ月・ 
+			<input type="number" name="day" value="<%=bean.getTask().getDay()%>"min="0" max="30">日・ 
+			<input type="number" name="hour"value="<%=bean.getTask().getHour()%>" min="0" max="23">時間・ 
+			<input type="number"name="minutes" value="<%=bean.getTask().getMinutes()%>" min="0" max="59">分
 		</p>
 
 		<Button type="submit" name="taskid"
