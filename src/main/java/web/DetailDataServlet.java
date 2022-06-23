@@ -10,68 +10,135 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.DetailBean;
 import dao.DBUtil;
+import dao.PicturesDao;
 import dao.TasksDao;
+import input.EditInput;
+import vo.PicturesVo;
+import vo.TasksVo;
+import vo.UsersVo;
 
 @WebServlet("/DetailDataServlet")
 public class DetailDataServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+
+		request.setCharacterEncoding("UTF-8");
+
+		DetailBean bean = new DetailBean();
+
+		HttpSession session = request.getSession();
+		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
+		bean.setUserName(user.getUsername());
+
+		EditInput input = receiveInput(request);
+
+		TasksVo task = convertNewTask(input, user.getUserid());
+
+		sendDB(task);
+
+		RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
+		disp.forward(request, response);
+
+		//		PicturesVo pic = getPicture(task.getPictures_pictureid());
+		//		bean.addPicturePath(pic.getPath());
+
+	}
+
+	private void sendDB(TasksVo inputData) {
+
 		DBUtil db = new DBUtil();
 		try (Connection c = db.getConnection();) {
 
 			TasksDao tsksdao = new TasksDao(c);
 
-			request.setCharacterEncoding("UTF-8");
-			String tskid = request.getParameter("taskid");
-			int taskid = Integer.parseInt(tskid);
-			String taskname = request.getParameter("taskname");
-
-			String taskdetail = request.getParameter("taskdetail");
-			
-			String kigen = request.getParameter("tasktime");
-			
-			String maildate = request.getParameter("maildate");
-			
-			
-			String month = request.getParameter("month");
-			String day = request.getParameter("day");
-			String hour = request.getParameter("hour");
-			String minutes = request.getParameter("minutes");
-			String interval = "0000-" + month + "-" + day + " " + hour + ":" + minutes;
-			
-			String stringNeedmail = request.getParameter("needmail");
-			
-			int needmail;
-			if(stringNeedmail.equals("Yes")) {
-				needmail = 1;
-			}else {
-				needmail = 0;
-				maildate = null;
-			}
-			
-			String stringRegular = request.getParameter("regular");
-			int regular;
-			if(stringRegular.equals("Yes")) {
-				regular = 1;
-			}else {
-				regular = 0;
-				interval = null;
-			}
-			
-			tsksdao.update(taskid, taskname, taskdetail, kigen, maildate,interval, needmail, regular);//後でbeanにまとめてupdate関数に渡す
-				
-			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
-			disp.forward(request, response);
+			tsksdao.update(inputData);
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+
 	}
-	
-	
+
+	private TasksVo convertNewTask(EditInput ei, int userId) {
+
+		int taskid = Integer.parseInt(ei.getTaskid());
+
+		String interval = "0000-" + ei.getMonth() + "-" + ei.getDay() + " " + ei.getHour() + ":" + ei.getMinutes();
+
+		boolean boolNeedmail = Boolean.valueOf(ei.getNeedmail());
+		boolean boolRegular = Boolean.valueOf(ei.getRegular());
+
+		if (boolNeedmail == false) {
+			ei.setMaildate(null);
+		}
+
+		if (boolRegular == false) {
+			interval = null;
+		}
+
+		return new TasksVo(
+				taskid,
+				ei.getTaskname(),
+				ei.getTaskdetail(),
+				ei.getTasktime(),
+				ei.getMaildate(),
+				interval,
+				boolNeedmail,
+				boolRegular);
+	}
+
+	private EditInput receiveInput(HttpServletRequest request) {
+
+		return new EditInput(
+				request.getParameter("taskid"),
+				request.getParameter("taskname"),
+				request.getParameter("taskdetail"),
+				request.getParameter("tasktime"),
+				request.getParameter("maildate"),
+				request.getParameter("month"),
+				request.getParameter("day"),
+				request.getParameter("hour"),
+				request.getParameter("minutes"),
+				request.getParameter("needmail"),
+				request.getParameter("regular"));
+
+	}
+
+	private PicturesVo getPicture(int pictureid) {
+
+		PicturesVo pic;
+
+		DBUtil db = new DBUtil();
+
+		try (Connection c = db.getConnection();) {
+
+			PicturesDao dao = new PicturesDao(c);
+
+			pic = dao.getPicture(pictureid);
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return pic;
+	}
+
+	private static TasksVo getTasksVo(int num) {
+
+		DBUtil db = new DBUtil();
+		TasksVo task;
+
+		try (Connection c = db.getConnection();) {
+			TasksDao tdao = new TasksDao(c);
+			task = tdao.getExtractTasks(num);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return task;
+	}
+
 }

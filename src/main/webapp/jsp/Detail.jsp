@@ -99,8 +99,8 @@
 
 		<p>
 			・アラートメール送信の有無<br> 
-			<input type="radio" name="needmail"value="Yes" <%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes
-			<input type="radio" name="needmail" value="No"<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
+			<input type="radio" name="needmail"value="true" <%=bean.getTask().isNeedmail() ? "checked" : ""%>>Yes
+			<input type="radio" name="needmail" value="false"<%=!bean.getTask().isNeedmail() ? "checked" : ""%>>No
 		</p>
 
 		<p>
@@ -110,8 +110,8 @@
 
 		<p>
 			・繰り返し設定の有無<br> 
-			<input type="radio" name="regular" value="Yes"<%= isRegular.equals("true")? "checked" : ""%>>Yes 
-			<input type="radio" name="regular" value="No" <%= isRegular.equals("false") ? "checked" : ""%>>No
+			<input type="radio" name="regular" value="true"<%= isRegular.equals("true")? "checked" : ""%>>Yes 
+			<input type="radio" name="regular" value="false" <%= isRegular.equals("false") ? "checked" : ""%>>No
 		</p>
 
 		<p>

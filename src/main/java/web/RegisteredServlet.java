@@ -45,7 +45,6 @@ public class RegisteredServlet extends HttpServlet {
 
 		// 入力を受け取る
 		RegisterInput input = receiveInput(request);
-		System.out.println(input);
 
 		// 以前の入力をセッションから取得
 		RegisterInput preinput = (RegisterInput) session.getAttribute("preinput");
@@ -59,7 +58,7 @@ public class RegisteredServlet extends HttpServlet {
 			rbean.addPicturePath(pv.getPath());
 		}
 
-		if (input.getName().isEmpty() && input.getDateKigen().equals(" ")) {
+		if (input.getName().isEmpty() && input.getDateKigen().isEmpty()) {
 
 			rbean.setTaskNameExists(false);
 			rbean.setTaskKigenExists(false);
@@ -78,7 +77,7 @@ public class RegisteredServlet extends HttpServlet {
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Register.jsp");
 			disp.forward(request, response);
 
-		} else if (input.getDateKigen().equals(" ")) {
+		} else if (input.getDateKigen().isEmpty()) {
 			rbean.setTaskNameExists(true);
 			rbean.setTaskKigenExists(false);
 
@@ -108,6 +107,7 @@ public class RegisteredServlet extends HttpServlet {
 			TasksVo newTask = convertNewTask(input, usersVo.getUserid());
 			sendDB(newTask);
 
+			//セッションに生成したタスクを保存
 			session.setAttribute("preTask", newTask);
 
 			PicturesVo pv = getPicture(newTask.getPictures_pictureid());

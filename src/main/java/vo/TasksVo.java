@@ -55,7 +55,21 @@ public class TasksVo implements Serializable {
 		this.alreadysend = false;
 	}
 
-
+	public TasksVo(int taskid, String taskname, String taskbody, String kigen,
+			String mailtime, String taskinterval, boolean needmail, boolean regular) {
+		super();
+		this.taskid = taskid;
+		this.taskname = taskname;
+		this.taskbody = taskbody;
+		this.completed = false;
+		this.kigen = kigen;
+		this.needmail = needmail;
+		this.mailtime = mailtime;
+		this.regular = regular;
+		this.taskinterval = taskinterval;
+		this.taskvisible = true;
+		this.alreadysend = false;
+	}
 
 	public int getTaskid() {
 		return taskid;
@@ -182,7 +196,7 @@ public class TasksVo implements Serializable {
 		if (taskinterval != null) {
 			buffer.append("\n taskinterval: ");
 			buffer.append(taskinterval);
-		}else {
+		} else {
 			taskinterval = "false";
 			buffer.append("\n taskinterval: ");
 			buffer.append(taskinterval);

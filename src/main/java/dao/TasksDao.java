@@ -228,17 +228,17 @@ public class TasksDao {
 
 	}
 
-	public void update(int id, String taskname, String taskdetail, String kigen, String maildate, String interval, int needmail, int regular) {
+	public void update(TasksVo data) {
 
 		try (PreparedStatement stmt = this.con.prepareStatement(UPDATE_SQL)) {
-			stmt.setString(1, taskname);
-			stmt.setString(2, taskdetail);
-			stmt.setString(3, kigen);
-			stmt.setString(4, maildate);
-			stmt.setString(5, interval);
-			stmt.setInt(6, needmail);
-			stmt.setInt(7, regular);
-			stmt.setInt(8, id);
+			stmt.setString(1, data.getTaskname());
+			stmt.setString(2, data.getTaskbody());
+			stmt.setString(3, data.getKigen());
+			stmt.setString(4, data.getMailtime());
+			stmt.setString(5, data.getTaskinterval());
+			stmt.setBoolean(6, data.isNeedmail());
+			stmt.setBoolean(7, data.isRegular());
+			stmt.setInt(8, data.getTaskid());
 			/* ｓｑｌ実行 */
 			stmt.executeUpdate();
 		} catch (SQLException e) {
