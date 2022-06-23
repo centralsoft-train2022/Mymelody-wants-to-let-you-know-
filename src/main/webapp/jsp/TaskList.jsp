@@ -23,8 +23,8 @@
 	if (bean.getAchievementFlag()) {
 			%>
 			<script>
-			let option = 'width=300,height=300,left=200,top=200'
-			let newwin = window.open("jsp/PopTest2.jsp","popUp", option);
+			let option = 'width=700,height=500,left=200,top=200'
+			let newwin = window.open("jsp/Okorare.jsp","popUp", option);
 			
 			</script>
 			
