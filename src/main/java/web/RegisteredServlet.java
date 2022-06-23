@@ -88,10 +88,10 @@ public class RegisteredServlet extends HttpServlet {
 			disp.forward(request, response);
 
 		} else if (input.equals(preinput)) {
-			
+
 			// セッションからタスクを取得
 			TasksVo preTask = (TasksVo) session.getAttribute("preTask");
-			
+
 			PicturesVo pv = getPicture(preTask.getPictures_pictureid());
 
 			cbean.addPicturePath(pv.getPath());
@@ -101,15 +101,15 @@ public class RegisteredServlet extends HttpServlet {
 
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Cheer.jsp");
 			disp.forward(request, response);
-			
+
 		} else {
 
 			// 入力からタスクを生成
 			TasksVo newTask = convertNewTask(input, usersVo.getUserid());
 			sendDB(newTask);
-			
+
 			session.setAttribute("preTask", newTask);
-			
+
 			PicturesVo pv = getPicture(newTask.getPictures_pictureid());
 
 			cbean.addPicturePath(pv.getPath());
