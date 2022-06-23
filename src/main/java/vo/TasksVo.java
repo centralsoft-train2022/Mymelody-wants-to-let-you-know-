@@ -24,6 +24,11 @@ public class TasksVo implements Serializable {
 	private int pictures_pictureid;
 	private boolean alreadysend;
 
+	private String month;
+	private String day;
+	private String hour;
+	private String minutes;
+
 	/**
 	* Constractor
 	*/
@@ -53,6 +58,7 @@ public class TasksVo implements Serializable {
 		this.users_userid = users_userid;
 		this.pictures_pictureid = pictures_pictureid;
 		this.alreadysend = false;
+		splitDatetime(taskinterval);
 	}
 
 	public TasksVo(int taskid, String taskname, String taskbody, String kigen,
@@ -69,6 +75,7 @@ public class TasksVo implements Serializable {
 		this.taskinterval = taskinterval;
 		this.taskvisible = true;
 		this.alreadysend = false;
+		splitDatetime(taskinterval);
 	}
 
 	public int getTaskid() {
@@ -220,4 +227,35 @@ public class TasksVo implements Serializable {
 		this.alreadysend = alreadysend;
 	}
 
+	private void splitDatetime(String taskInterval) {
+		if (taskInterval != null) {
+			String[] stringList = taskInterval.split("[- :]");
+
+			this.month = String.valueOf(Integer.parseInt(stringList[1]));
+			this.day = String.valueOf(Integer.parseInt(stringList[2]));
+			this.hour = String.valueOf(Integer.parseInt(stringList[3]));
+			this.minutes = String.valueOf(Integer.parseInt(stringList[4]));
+		} else {
+			this.month = "0";
+			this.day = "0";
+			this.hour = "0";
+			this.minutes = "0";
+		}
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public String getHour() {
+		return hour;
+	}
+
+	public String getMinutes() {
+		return minutes;
+	}
 }

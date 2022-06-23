@@ -150,14 +150,14 @@ public class TasksDao {
 
 	}
 
-	public TasksVo getExtractTasks(int num) {
+	public TasksVo getTask(int taskid) {
 
 		TasksVo task = new TasksVo();
 
 		try (PreparedStatement stmt = this.con.prepareStatement(Extract_AllTASKS_SQL)) {
 
 			// +"EMPLOYEEID="+i);//これはつかわない SQLインジェクション対策、高速化対策
-			stmt.setInt(1, num);
+			stmt.setInt(1, taskid);
 			/* ｓｑｌ実行 */
 			try (ResultSet rset = stmt.executeQuery();) {
 

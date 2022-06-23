@@ -75,7 +75,7 @@ public class DetailServlet extends HttpServlet {
 
 		try (Connection c = db.getConnection();) {
 			TasksDao tdao = new TasksDao(c);
-			task = tdao.getExtractTasks(num);
+			task = tdao.getTask(num);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
