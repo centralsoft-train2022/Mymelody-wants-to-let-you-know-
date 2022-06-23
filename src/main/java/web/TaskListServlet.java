@@ -27,9 +27,7 @@ public class TaskListServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 社員リストwoDBから取得 課題
-		//		EmployeesVo  emp = getEmployeesVo("aaaaa");//テストデータ（１つの場合）
-
+		
 		//セッションからログインユーザーを取得
 		HttpSession session = request.getSession();
 		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
