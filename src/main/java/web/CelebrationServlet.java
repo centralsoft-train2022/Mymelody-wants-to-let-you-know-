@@ -38,6 +38,11 @@ public class CelebrationServlet extends HttpServlet {
 		String s = request.getParameter("id");
 		int num = Integer.parseInt(s);
 		Taskachievement(num);
+		
+		//セッションからユーザーを取得
+		HttpSession session = request.getSession();
+		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
+		bean.setUserName(user.getUsername());
 
 		//JSPに遷移する
 		request.setAttribute("bean", bean);
