@@ -34,9 +34,9 @@
 	<div class="box1">
 		<form action="LoginServlet" method="post">
 
-			ユーザー名<input name="Mailaddress" type="text"><br> パスワード<input
-				name="Password" type="text"><br> <input type="submit"
-				value="ログイン">
+			ユーザー名<input name="Mailaddress" type="text"><br> 
+			パスワード<input type="password" name="Password" size="25"><br> 
+			<input type="submit" value="ログイン">
 		</form>
 	</div>
 

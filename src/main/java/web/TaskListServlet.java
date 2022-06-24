@@ -39,6 +39,8 @@ public class TaskListServlet extends HttpServlet {
 
 		int uid = user.getUserid();
 		List<TasksVo> taskList = getAllTasks(uid);
+		TaskListBean bean = new TaskListBean();
+
 		bean.setTaskList(taskList);
 
 //		updateTasks(taskList);
@@ -113,15 +115,13 @@ public class TaskListServlet extends HttpServlet {
 		return pic;
 	}
 
-	// 条件に合致しているデータがあるかを確認し、flagを立てるメソッド
-	// 最後はflag(Boolean)を返す
+	//最後はflag(Boolean)を返す
 	private Boolean checkAchievementFlag(int uid) {
 		boolean acievementFlag = false;
 		List<TasksVo> tskList = getAllTasks(uid);
 
 		for (TasksVo tsk : tskList) {
 
-			// System.out.println("aabc");
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date kigen = null;
 
@@ -133,17 +133,14 @@ public class TaskListServlet extends HttpServlet {
 			}
 
 			Date date = new Date();
-
 			if (kigen.before(date)) {// 現在日時が期限の日付を超えてるか
 				if (tsk.isTaskvisible()) {// 削除されていないか
 					if (!tsk.isCompleted()) {// 達成しているか
 						acievementFlag = true;
-						// System.out.println("aad");
 					}
 				}
 			}
 		}
-
 		return acievementFlag;
 
 	}

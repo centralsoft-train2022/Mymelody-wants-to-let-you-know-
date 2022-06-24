@@ -7,8 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<head>
-<meta charset="UTF-8">
 <title>ホーム画面</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -23,9 +21,8 @@
 	if (bean.getAchievementFlag()) {
 			%>
 			<script>
-			let option = 'width=700,height=500,left=200,top=200'
-			let newwin = window.open("jsp/Okorare.jsp","popUp", option);
-			
+			let option = 'width=700,height=500,left=200,top=200';
+			let newwin = window.open("OkorareServlet","popUp", option);
 			</script>
 			
 			<%
