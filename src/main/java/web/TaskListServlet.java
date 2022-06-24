@@ -89,7 +89,6 @@ public class TaskListServlet extends HttpServlet {
 
 		for (TasksVo tsk : tskList) {
 
-			System.out.println("aabc");
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date kigen = null;
 
@@ -105,7 +104,6 @@ public class TaskListServlet extends HttpServlet {
 			if (kigen.before(date)) {//現在日時が期限の日付を超えてるか
 				if (!tsk.isCompleted()) {//達成しているか
 					acievementFlag = true;
-					System.out.println("aad");
 				}
 			}
 		}

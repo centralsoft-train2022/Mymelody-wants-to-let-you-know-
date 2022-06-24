@@ -30,7 +30,6 @@ public class OkorareServlet extends HttpServlet {
 		Random r = new Random();
 		bean.addPicturePath(pictureList.get(r.nextInt(0, pictureList.size())).getPath());
 		request.setAttribute("bean", bean);
-		System.out.println("a");
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Okorare.jsp");
 		disp.forward(request, response);
 		
