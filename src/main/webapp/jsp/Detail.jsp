@@ -84,6 +84,35 @@
 			value="<%=bean.getTask().getTaskid()%>">削除</button>
 		<br>
 	</form>
+	
+			<%
+			if (!bean.isTaskNameExists() || !bean.isTaskKigenExists()) {
+			%>
+			<div style="color: red;" class="alart">
+			タスク名と期限を入力してください
+			</div>
+			<%
+			}
+			%>
+			<%
+			if (!bean.isMailtimeExists()) {
+			%>
+			<div style="color: red;" class="alart">
+			メール送信日時を入力してください
+			</div>
+			<%
+			}
+			%>
+			<%
+			if (!bean.isRegulartimeExists()) {
+			%>
+			<div style="color: red;" class="alart">
+			繰り返し期間を入力してください
+			</div>
+			<%
+			}
+			%>
+			
 	<h1>設定変更</h1>
 	<form method="POST" action="DetailDataServlet">
 
