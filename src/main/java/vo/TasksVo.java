@@ -228,13 +228,15 @@ public class TasksVo implements Serializable {
 	}
 
 	private void splitDatetime(String taskInterval) {
+
 		if (taskInterval != null) {
+
 			String[] stringList = taskInterval.split("[- :]");
 
-			this.month = String.valueOf(Integer.parseInt(stringList[1]));
-			this.day = String.valueOf(Integer.parseInt(stringList[2]));
-			this.hour = String.valueOf(Integer.parseInt(stringList[3]));
-			this.minutes = String.valueOf(Integer.parseInt(stringList[4]));
+			this.month = stringList[0];
+			this.day = stringList[1];
+			this.hour = stringList[2];
+			this.minutes = stringList[3];
 		} else {
 			this.month = "0";
 			this.day = "0";
