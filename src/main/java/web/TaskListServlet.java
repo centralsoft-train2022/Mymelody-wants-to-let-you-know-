@@ -39,7 +39,7 @@ public class TaskListServlet extends HttpServlet {
 
 		int uid = user.getUserid();
 		List<TasksVo> taskList = getAllTasks(uid);
-
+		
 		TaskListBean bean = new TaskListBean();
 		bean.setTaskList(taskList);
 
@@ -79,6 +79,7 @@ public class TaskListServlet extends HttpServlet {
 		}
 		return pic;
 	}
+
 
 	//条件に合致しているデータがあるかを確認し、flagを立てるメソッド
 	//最後はflag(Boolean)を返す

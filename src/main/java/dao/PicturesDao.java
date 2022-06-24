@@ -132,5 +132,14 @@ public class PicturesDao {
 			pv.setPath("composite/"+pv.getFileName());}
 		return list;
 	}
+	
+	public List<PicturesVo> getAngry() {
+		List<PicturesVo> list = new ArrayList<PicturesVo>();
+		list = getAllPictures();
+		list.removeIf(picture -> picture.getCharactertype() != 4);
+		for(PicturesVo pv:list) {
+			pv.setPath("angry/"+pv.getFileName());}
+		return list;
+	}
 
 }
