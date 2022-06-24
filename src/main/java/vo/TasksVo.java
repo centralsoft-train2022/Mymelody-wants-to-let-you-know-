@@ -203,10 +203,26 @@ public class TasksVo implements Serializable {
 		if (taskinterval != null) {
 			buffer.append("\n taskinterval: ");
 			buffer.append(taskinterval);
+			buffer.append("\n month: ");
+			buffer.append(month);
+			buffer.append("\n day: ");
+			buffer.append(day);
+			buffer.append("\n hour: ");
+			buffer.append(hour);
+			buffer.append("\n minutes: ");
+			buffer.append(minutes);
 		} else {
 			taskinterval = "false";
 			buffer.append("\n taskinterval: ");
 			buffer.append(taskinterval);
+			buffer.append("\n month: ");
+			buffer.append(month);
+			buffer.append("\n day: ");
+			buffer.append(day);
+			buffer.append("\n hour: ");
+			buffer.append(hour);
+			buffer.append("\n minutes: ");
+			buffer.append(minutes);
 		}
 
 		buffer.append("\n taskvisible: ");
@@ -228,13 +244,16 @@ public class TasksVo implements Serializable {
 	}
 
 	private void splitDatetime(String taskInterval) {
+
 		if (taskInterval != null) {
+
 			String[] stringList = taskInterval.split("[- :]");
 
-			this.month = String.valueOf(Integer.parseInt(stringList[1]));
-			this.day = String.valueOf(Integer.parseInt(stringList[2]));
-			this.hour = String.valueOf(Integer.parseInt(stringList[3]));
-			this.minutes = String.valueOf(Integer.parseInt(stringList[4]));
+			this.month = stringList[0];
+			this.day = stringList[1];
+			this.hour = stringList[2];
+			this.minutes = stringList[3];
+      
 		} else {
 			this.month = "0";
 			this.day = "0";

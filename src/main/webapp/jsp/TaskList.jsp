@@ -7,8 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<head>
-<meta charset="UTF-8">
 <title>ホーム画面</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -31,7 +29,7 @@
 			}
 			%>
 			
-
+	
 
 	<table>
 		<tr style="height: 10px;">

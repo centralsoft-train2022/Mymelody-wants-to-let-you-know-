@@ -47,6 +47,11 @@
 		<tr>
 			<%String isRegular = String.valueOf(bean.getTask().isRegular()); %>
 			<%String Mailtime = String.valueOf(bean.getTask().getMailtime());%>
+			
+			<%String Month =  bean.getTask().getTaskinterval().split("[- :]")[1]; %>
+			<%String Day =  bean.getTask().getTaskinterval().split("[- :]")[2]; %>
+			<%String Hour =  bean.getTask().getTaskinterval().split("[- :]")[3]; %>
+			<%String Minutes =  bean.getTask().getTaskinterval().split("[- :]")[4]; %>
 			<td><%=bean.getTask().getTaskname()%></td>
 			<td><%=bean.getTask().getTaskbody()%></td>
 			<td><%=bean.getTask().getKigen()%></td>
@@ -79,6 +84,35 @@
 			value="<%=bean.getTask().getTaskid()%>">削除</button>
 		<br>
 	</form>
+	
+			<%
+			if (!bean.isTaskNameExists() || !bean.isTaskKigenExists()) {
+			%>
+			<div style="color: red;" class="alart">
+			タスク名と期限を入力してください
+			</div>
+			<%
+			}
+			%>
+			<%
+			if (!bean.isMailtimeExists()) {
+			%>
+			<div style="color: red;" class="alart">
+			メール送信日時を入力してください
+			</div>
+			<%
+			}
+			%>
+			<%
+			if (!bean.isRegulartimeExists()) {
+			%>
+			<div style="color: red;" class="alart">
+			繰り返し期間を入力してください
+			</div>
+			<%
+			}
+			%>
+			
 	<h1>設定変更</h1>
 	<form method="POST" action="DetailDataServlet">
 
@@ -116,10 +150,10 @@
 
 		<p>
 			・繰り返し期間<br> 
-			<input type="number" name="month" value="<%=bean.getTask().getMonth()%>" min="0"max="12">カ月・ 
-			<input type="number" name="day" value="<%=bean.getTask().getDay()%>"min="0" max="30">日・ 
-			<input type="number" name="hour"value="<%=bean.getTask().getHour()%>" min="0" max="23">時間・ 
-			<input type="number"name="minutes" value="<%=bean.getTask().getMinutes()%>" min="0" max="59">分
+			<input type="number" name="month" value="<%=Month%>" min="0"max="12">カ月・ 
+			<input type="number" name="day" value="<%=Day%>"min="0" max="30">日・ 
+			<input type="number" name="hour"value="<%=Hour%>" min="0" max="23">時間・ 
+			<input type="number"name="minutes" value="<%=Minutes%>" min="0" max="59">分
 		</p>
 
 		<Button type="submit" name="taskid"
