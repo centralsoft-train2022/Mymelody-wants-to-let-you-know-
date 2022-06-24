@@ -22,10 +22,10 @@ public class EditInput {
 		this.taskdetail = taskdetail;
 		this.tasktime = tasktime;
 		this.maildate = maildate;
-		this.month = month;
-		this.day = day;
-		this.hour = hour;
-		this.minutes = minutes;
+		this.month = nulltozero(month);
+		this.day = nulltozero(day);
+		this.hour = nulltozero(hour);
+		this.minutes = nulltozero(minutes);
 		this.needmail = needmail;
 		this.regular = regular;
 	}
@@ -75,7 +75,7 @@ public class EditInput {
 	}
 
 	public void setMonth(String month) {
-		this.month = month;
+		this.month = nulltozero(month);
 	}
 
 	public String getDay() {
@@ -83,7 +83,7 @@ public class EditInput {
 	}
 
 	public void setDay(String day) {
-		this.day = day;
+		this.day = nulltozero(day);
 	}
 
 	public String getHour() {
@@ -91,7 +91,7 @@ public class EditInput {
 	}
 
 	public void setHour(String hour) {
-		this.hour = hour;
+		this.hour = nulltozero(hour);
 	}
 
 	public String getMinutes() {
@@ -99,7 +99,7 @@ public class EditInput {
 	}
 
 	public void setMinutes(String minutes) {
-		this.minutes = minutes;
+		this.minutes = nulltozero(minutes);
 	}
 
 	public String getNeedmail() {
@@ -118,11 +118,18 @@ public class EditInput {
 		this.regular = regular;
 	}
 
+	private static String nulltozero(String str) {
+		if (str.isBlank()) {
+			return "0";
+		}
+		return str;
+	}
+
 	@Override
 	public String toString() {
 		return "EditInput [taskid=" + taskid + ", taskname=" + taskname + ", taskdetail=" + taskdetail + ", tasktime="
 				+ tasktime + ", maildate=" + maildate + ", month=" + month + ", day=" + day + ", hour=" + hour
-				+ ", minutes=" + minutes + ", regular=" + regular + "]";
+				+ ", minutes=" + minutes + ", needmail=" + needmail + ", regular=" + regular + "]";
 	}
 
 }

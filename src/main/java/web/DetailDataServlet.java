@@ -39,17 +39,34 @@ public class DetailDataServlet extends HttpServlet {
 		//入力を受け取る
 		EditInput input = receiveInput(request);
 
-		if (!correct(input)) {
+		//Beanにタスクを渡す
+		bean.setTask(getTask(Integer.parseInt(input.getTaskid())));
 
-			bean.setTask(getTask(Integer.parseInt(input.getTaskid())));
+		//Beanにタスクを渡す
+		bean.addPicturePath(
+				getPicture(getTask(Integer.parseInt(input.getTaskid())).getPictures_pictureid()).getPath());
 
-			bean.addPicturePath(
-					getPicture(getTask(Integer.parseInt(input.getTaskid())).getPictures_pictureid()).getPath());
+		if (input.getTaskname().isBlank() || input.getTasktime().isBlank()) {
 
-			request.setAttribute("bean", bean);
+			bean.setTaskNameExists(false);
+			bean.setTaskKigenExists(false);
 
-			RequestDispatcher disp = request.getRequestDispatcher("/jsp/Detail.jsp");
-			disp.forward(request, response);
+			goDetailJsp(response, request, bean);
+
+		} else if (input.getNeedmail().equals("true") && input.getMaildate().isBlank()) {
+
+			bean.setMailtimeExists(false);
+
+			goDetailJsp(response, request, bean);
+
+		} else if (input.getRegular().equals("true") &&
+				input.getMonth().equals("0") && input.getDay().equals("0") && input.getHour().equals("0")
+				&& input.getMinutes().equals("0")) {
+
+			bean.setRegulartimeExists(false);
+
+			goDetailJsp(response, request, bean);
+
 		} else {
 
 			TasksVo task = convertNewTask(input, user.getUserid());
@@ -59,20 +76,17 @@ public class DetailDataServlet extends HttpServlet {
 			RequestDispatcher disp = request.getRequestDispatcher("TaskListServlet");
 			disp.forward(request, response);
 
-			PicturesVo pic = getPicture(task.getPictures_pictureid());
-			bean.addPicturePath(pic.getPath());
-
 		}
 	}
 
-	private boolean correct(EditInput input) {
-		if (input.getTaskname().isBlank()) {
-			return false;
-		}
-		if (input.getTasktime().isBlank()) {
-			return false;
-		}
-		return true;
+	private void goDetailJsp(HttpServletResponse response, HttpServletRequest request, DetailBean bean)
+			throws ServletException, IOException {
+
+		request.setAttribute("bean", bean);
+
+		RequestDispatcher disp = request.getRequestDispatcher("/jsp/Detail.jsp");
+		disp.forward(request, response);
+
 	}
 
 	private void sendDB(TasksVo inputData) {
