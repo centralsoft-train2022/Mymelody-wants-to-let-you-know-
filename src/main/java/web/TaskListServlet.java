@@ -30,22 +30,24 @@ public class TaskListServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		//セッションからログインユーザーを取得
+
+		// セッションからログインユーザーを取得
 		HttpSession session = request.getSession();
 		UsersVo user = (UsersVo) session.getAttribute("UsersVo");
 
+		TaskListBean bean = new TaskListBean();
+
 		int uid = user.getUserid();
 		List<TasksVo> taskList = getAllTasks(uid);
-
-		TaskListBean bean = new TaskListBean();
 		bean.setTaskList(taskList);
 
-		//期日過ぎてて達せしてないやつを確認して格納
+//		updateTasks(taskList);
+
+		// 期日過ぎてて達せしてないやつを確認して格納
 		boolean acievementFlag = checkAchievementFlag(uid);
 		bean.setAchievementFlag(acievementFlag);
 
-		//taskListからキャラクターの画像ファイルを取得しBeanへ
+		// taskListからキャラクターの画像ファイルを取得しBeanへ
 		for (TasksVo task : taskList) {
 			PicturesVo pic = getPicture(task.getPictures_pictureid());
 			bean.addPicturePath(pic.getPath());
@@ -58,6 +60,39 @@ public class TaskListServlet extends HttpServlet {
 		// JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/TaskList.jsp");
 		disp.forward(request, response);
+	}
+
+	private void updateTasks(List<TasksVo> taskList) {
+
+		for (TasksVo task : taskList) {
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date kigen = null;
+
+			try {
+				kigen = formatter.parse(task.getKigen());
+			} catch (ParseException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
+			Date date = new Date();
+
+			if (kigen.before(date)) {// 現在日時が期限の日付を超えてるか
+				if (task.isTaskvisible()) {// 削除されていないか
+					if (task.isCompleted()) {// 繰り返しタスクかどうか
+						
+						String newKigen = task.getKigen();
+						
+						TasksVo newTask = new TasksVo(task.getTaskid(), task.getTaskbody(), task.getTaskbody(),
+								task.getKigen(), task.getMailtime(), task.getTaskinterval(), task.isNeedmail(),
+								task.isRegular());
+
+						updateTask(newTask);
+					}
+				}
+			}
+		}
 	}
 
 	private PicturesVo getPicture(int pictureid) {
@@ -78,15 +113,15 @@ public class TaskListServlet extends HttpServlet {
 		return pic;
 	}
 
-	//条件に合致しているデータがあるかを確認し、flagを立てるメソッド
-	//最後はflag(Boolean)を返す
+	// 条件に合致しているデータがあるかを確認し、flagを立てるメソッド
+	// 最後はflag(Boolean)を返す
 	private Boolean checkAchievementFlag(int uid) {
 		boolean acievementFlag = false;
 		List<TasksVo> tskList = getAllTasks(uid);
 
 		for (TasksVo tsk : tskList) {
 
-			//System.out.println("aabc");
+			// System.out.println("aabc");
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date kigen = null;
 
@@ -99,11 +134,11 @@ public class TaskListServlet extends HttpServlet {
 
 			Date date = new Date();
 
-			if (kigen.before(date)) {//現在日時が期限の日付を超えてるか
-				if (tsk.isTaskvisible()) {//削除されていないか
-					if (!tsk.isCompleted()) {//達成しているか
+			if (kigen.before(date)) {// 現在日時が期限の日付を超えてるか
+				if (tsk.isTaskvisible()) {// 削除されていないか
+					if (!tsk.isCompleted()) {// 達成しているか
 						acievementFlag = true;
-						//System.out.println("aad");
+						// System.out.println("aad");
 					}
 				}
 			}
@@ -131,4 +166,18 @@ public class TaskListServlet extends HttpServlet {
 		return tskList;
 	}
 
+	private void updateTask(TasksVo inputData) {
+
+		DBUtil db = new DBUtil();
+		try (Connection c = db.getConnection();) {
+
+			TasksDao tsksdao = new TasksDao(c);
+
+			tsksdao.update(inputData);
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
 }

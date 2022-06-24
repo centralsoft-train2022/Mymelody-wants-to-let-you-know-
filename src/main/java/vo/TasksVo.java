@@ -61,8 +61,14 @@ public class TasksVo implements Serializable {
 		splitDatetime(taskinterval);
 	}
 
-	public TasksVo(int taskid, String taskname, String taskbody, String kigen,
-			String mailtime, String taskinterval, boolean needmail, boolean regular) {
+	public TasksVo(int taskid, 
+			String taskname, 
+			String taskbody, 
+			String kigen,
+			String mailtime, 
+			String taskinterval, 
+			boolean needmail, 
+			boolean regular) {
 		super();
 		this.taskid = taskid;
 		this.taskname = taskname;
