@@ -11,15 +11,9 @@
 </head>
 <body>
 
-<<<<<<< HEAD
-	<img src="pictures/<%=bean.getPicturePath(0)%>" title="キャラクター画像" class="image">
 
-=======
-	<img src="../pictures/マイメロママ.png" title="マイメロママ"
-		class="image">
-		<br>
+	<img src="pictures/<%=bean.getPicturePath(0)%>" title="キャラクター画像" class="image"><br>
 	<div style="align: center;" class="balloon1-top">
->>>>>>> c1d4094406f5660fc99929b1fe5aae4637d0a8a3
 	ぶち殺す
 	</div>
 	
