@@ -13,11 +13,11 @@
 
 	<img src="../pictures/マイメロママ.png" title="マイメロママ"
 		class="image">
-
+		<br>
+	<div style="align: center;" class="balloon1-top">
 	ぶち殺す
-	<form method="POST" action="../TaskListServlet">
-		<button name="back">戻る</button>
-	</form>
+	</div>
+	
 
 </body>
 </html>
