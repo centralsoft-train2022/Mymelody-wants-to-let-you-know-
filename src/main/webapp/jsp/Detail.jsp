@@ -48,10 +48,10 @@
 			<%String isRegular = String.valueOf(bean.getTask().isRegular()); %>
 			<%String Mailtime = String.valueOf(bean.getTask().getMailtime());%>
 			
-			<%String Month =  bean.getTask().getTaskinterval().split("[- :]")[1]; %>
-			<%String Day =  bean.getTask().getTaskinterval().split("[- :]")[2]; %>
-			<%String Hour =  bean.getTask().getTaskinterval().split("[- :]")[3]; %>
-			<%String Minutes =  bean.getTask().getTaskinterval().split("[- :]")[4]; %>
+			<%String Month =  bean.getTask().getMonth(); %>
+			<%String Day =  bean.getTask().getDay(); %>
+			<%String Hour =  bean.getTask().getHour(); %>
+			<%String Minutes =  bean.getTask().getMinutes(); %>
 			<td><%=bean.getTask().getTaskname()%></td>
 			<td><%=bean.getTask().getTaskbody()%></td>
 			<td><%=bean.getTask().getKigen()%></td>

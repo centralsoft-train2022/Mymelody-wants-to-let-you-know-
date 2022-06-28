@@ -39,8 +39,6 @@ public class TaskListServlet extends HttpServlet {
 
 		int uid = user.getUserid();
 		List<TasksVo> taskList = getAllTasks(uid);
-		TaskListBean bean = new TaskListBean();
-
 		bean.setTaskList(taskList);
 
 //		updateTasks(taskList);
